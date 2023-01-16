@@ -1,5 +1,5 @@
 <?php
-$tx2 = fopen(__DIR__ . "/../tx2/" . date("Y-m-d h-i-s") . '.TX2', "a");
+$tx2 = fopen(__DIR__ . "/../tx2/" . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s") . '.TX2', "a");
 
 fwrite($tx2, "Formato=" . $_POST["Formato"]);
 fwrite($tx2, "\nnumlote=" . $_POST["numlote"]);
@@ -52,7 +52,7 @@ fwrite($tx2, "\nINDIEDEST_E16A=" . $_POST["INDIEDEST_E16A"]);
 
 $item = $_POST['item'];
 
-for ($i = 0; $i < count($item); $i++) {
+for ($i = 1; $i <= count($item); $i++) {
     fwrite($tx2, "\nINCLUIRITEM");
     fwrite($tx2, "\nnItem_H02=" . $item[$i]["'nItem_H02'"]);
     fwrite($tx2, "\ncProd_I02=" . $_POST["cProd_I02"]);

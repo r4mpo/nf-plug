@@ -9,15 +9,6 @@ function apenasNumeros(evt) {
     }
 }
 
-function justNumbers(el) {
-    var numbers = el.value.replace(/[^0-9]/g, '');
-    el.value = parseInt(numbers);
-}
-
-// window.onmouseover = function () {
-//     definirValorOutrasDespesas();
-// }
-
 function definirValorOutrasDespesas() {
     let frete = document.getElementById('vFrete_W08').value;
     let seguro = document.getElementById('vSeg_W09').value;
@@ -51,5 +42,3 @@ function somarOutrasDespesasNoValorTotalNfe() {
     document.getElementById('vNF_W16').value = 'R$ ' + valorTotalNfe;
 
 }
-
-

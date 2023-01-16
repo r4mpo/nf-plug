@@ -1,7 +1,8 @@
 <!-- Considerações -->
 <div class="bloc-section">
     <div class="container text-center">
-        <h5>Considerações</h5>
+        <!-- <h5>Considerações</h5> -->
+        <h5>Resumo da Nota Fiscal</h5>
         <div class="row">
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-cash"></i></span>
@@ -15,7 +16,7 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-cash"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form formatar-moeda" id="vPag_YA03" name="vPag_YA03"
+                    <input type="text" readonly class="form-control bg-color-cinza validate-form formatar-moeda" id="vPag_YA03" name="vPag_YA03"
                         onkeyup="formatarMoeda(this);" value="<?php echo $order->get_total(); ?>">
                     <label for="vPag_YA03">Valor a ser pago</label>
                 </div>
@@ -67,7 +68,7 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-cash"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form formatar-moeda" id="vProd_W07"
+                    <input type="text" readonly class="form-control bg-color-cinza validate-form formatar-moeda" id="vProd_W07"
                         value="<?php echo 'R$ ' . number_format(array_sum($valueItems), 2, '.', ''); ?>"
                         name="vProd_W07" onkeyup="formatarMoeda(this);">
                     <label for="vProd_W07">Valor total dos produtos</label>
@@ -94,9 +95,9 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-cash"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="vDesc_W10" name="vDesc_W10"
+                    <input type="text" class="form-control validate-form formatar-moeda" id="vDesc_W10" name="vDesc_W10"
                         onkeyup="formatarMoeda(this);"
-                        value="R$ <?php echo $order->get_total_discount(); ?>">
+                        value="<?php echo $order->get_total_discount(); ?>">
                     <label for="vDesc_W10">Valor total do desconto</label>
                 </div>
             </div>
@@ -140,7 +141,7 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-cash"></i></span>
                 <div class="form-floating">
-                    <input type="text" readonly class="form-control validate-form formatar-moeda" id="vOutro_W15" value="0" name="vOutro_W15"
+                    <input type="text" readonly class="form-control validate-form bg-color-cinza formatar-moeda" id="vOutro_W15" value="0" name="vOutro_W15"
                         onkeyup="formatarMoeda(this);">
                     <label for="vOutro_W15">Outras despesas</label>
                 </div>

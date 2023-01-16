@@ -32,3 +32,4 @@
 <input type="hidden" class="validate-config" name="fone_ZD06" value="<?php echo $configuracoes['fone_ZD06']; ?>">
 <input type="hidden" class="validate-config" name="serie_B07" value="<?php echo $configuracoes['serie_B07']; ?>">
 <input type="hidden" class="validate-config" name="nNF_B08" value="<?php echo $configuracoes['nNF_B08']; ?>">
+<input type="hidden" class="validate-config" name="numero_do_pedido_woocommerce" value="<?php echo $id; ?>">

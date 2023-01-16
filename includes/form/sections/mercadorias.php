@@ -1,7 +1,7 @@
 <!-- Mercadorias -->
 
 <?php
-$contador = 0;
+$contador = 1;
 foreach ($order->get_items() as $item_key => $item): ?>
 
     <div class="bloc-section">
@@ -21,7 +21,7 @@ foreach ($order->get_items() as $item_key => $item): ?>
                     <span class="input-group-text"><i class="bi bi-coin"></i></span>
                     <div class="form-floating">
                         <input type="text" class="form-control validate-form formatar-moeda" id="item[<?php echo $contador; ?>]['vUnTrib_I14a']"
-                            name="item[<?php echo $contador; ?>]['vUnTrib_I14a']" onkeyup="formatarMoeda(this);">
+                            name="item[<?php echo $contador; ?>]['vUnTrib_I14a']" value="0" onkeyup="formatarMoeda(this);">
                         <label for="item[<?php echo $contador; ?>]['vUnTrib_I14a']">Valor tributo unitário</label>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ foreach ($order->get_items() as $item_key => $item): ?>
                     <span class="input-group-text"><i class="bi bi-regex"></i></span>
                     <div class="form-floating">
                         <input type="text" class="form-control validate-form" id="item[<?php echo $contador; ?>]['nItem_H02']"
-                            value="<?php echo $item->get_product_id(); ?>" onkeypress="return apenasNumeros();"
+                            value="<?php echo $contador; ?>" onkeypress="return apenasNumeros();"
                             name="item[<?php echo $contador; ?>]['nItem_H02']">
                         <label for="item[<?php echo $contador; ?>]['nItem_H02']">ID do Produto</label>
                     </div>

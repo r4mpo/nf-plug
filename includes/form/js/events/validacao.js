@@ -20,7 +20,7 @@ function validarFormulario() {
     configs.forEach(element => {
         if ((element.value).length == 0) {
             erros++;
-            return alert('deu ruim: ' + element.id);
+            return alert('Erro. Você deve preencher as informações iniciais.');
         }
     });
 
@@ -44,7 +44,23 @@ function validarFormulario() {
         let outrasDespesas = document.getElementById('vOutro_W15').value = (parseFloat(seguro) + parseFloat(frete)) / 100;
     // 
 
-    if(erros == 0) {
-        document.getElementById('nfe_form').submit();
+    if(erros == 0) 
+    {
+        let confirmacao = confirm('Tem certeza que deseja emitir esta nota fiscal?')
+
+        if(confirmacao == true)
+        {
+            document.getElementById('nfe_form').submit();
+        }
+    }
+}
+
+function retornar()
+{
+    let confirmacao = confirm('Tem certeza que deseja descartar todas as alterações e retornar?')
+
+    if(confirmacao == true)
+    {
+        window.location.href = '../table/index.php';
     }
 }

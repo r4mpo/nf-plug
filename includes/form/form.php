@@ -47,6 +47,15 @@ $configuracoes = get_option('nf_plug_dados');
 </head>
 
 <body>
+
+    <div class="bloc-section">
+        <h3>
+            <i class="bi bi-info-square"></i>
+            Geração de NF-e
+        </h3>
+        <hr>
+    </div>
+
     <form action="backend/tecnospeed.php" id="nfe_form" method="POST">
         <?php
         include_once('sections/introducao.php');
@@ -61,7 +70,7 @@ $configuracoes = get_option('nf_plug_dados');
             <div class="container text-center">
                 <div class="row">
                     <div class="d-grid gap-2 d-md-block">
-                        <a href="../table/index.php"><button class="btn btn-warning" type="button">Cancelar</button></a>
+                        <button class="btn btn-warning" onclick="retornar()" type="button">Cancelar</button>
                         <button class="btn btn-success" onclick="validarFormulario()" type="button">Confirmar</button>
                     </div>
                 </div>
@@ -69,4 +78,5 @@ $configuracoes = get_option('nf_plug_dados');
         </div>
     </form>
 </body>
+
 </html>

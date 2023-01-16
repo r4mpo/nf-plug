@@ -33,7 +33,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_options_page(
                 'Settings',
-                'nf plug',
+                'NF-e PLUG',
                 'manage_options',
                 $this->plugin_slug,
                 array($this, 'create_admin_page')

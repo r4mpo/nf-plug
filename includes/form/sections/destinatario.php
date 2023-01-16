@@ -4,15 +4,6 @@
         <h5>Destinatário</h5>
         <div class="row">
             <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-house"></i></span>
-                <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="nro_E07" name="nro_E07"
-                        onkeypress="return apenasNumeros();" value="<?php echo $order->get_meta_data()[6]->value; ?>">
-                    <label for="nro_E07">Nº Residência</label>
-                </div>
-            </div>
-
-            <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-file-text"></i></span>
                 <div class="form-floating">
                     <input type="text" class="form-control validate-form" maxlength="15" id="CNPJ_E02"
@@ -24,8 +15,8 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-file-text"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="CPF_E03" onkeydown="javascript: fMasc( this, mCPF );"
-                        maxlength="14" name="CPF_E03">
+                    <input type="text" class="form-control validate-form" id="CPF_E03"
+                        onkeydown="javascript: fMasc( this, mCPF );" maxlength="14" name="CPF_E03">
                     <label for="CPF_E03">CPF</label>
                 </div>
             </div>
@@ -40,22 +31,40 @@
             </div>
 
             <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-globe-americas"></i></span>
+                <span class="input-group-text"><i class="bi bi-house"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="UF_E12" name="UF_E12">
-                    <label for="UF_E12">Estado</label>
+                    <input type="text" class="form-control validate-form" id="nro_E07" name="nro_E07"
+                        onkeypress="return apenasNumeros();" value="<?php echo $order->get_meta_data()[6]->value; ?>">
+                    <label for="nro_E07">Nº Residência</label>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-map"></i></span>
                 <div class="form-floating">
                     <input type="text" class="form-control validate-form" id="CEP_E13" name="CEP_E13"
                         value="<?php echo $order->shipping_postcode; ?>" onkeypress="return apenasNumeros();"
-                        onkeyup="viaCep('CEP_E13', 'xBairro_E09', 'xMun_E11', 'UF_E12', 'xLgr_E06')" maxlength="12">
+                        onkeyup="viaCep('CEP_E13', 'xBairro_E09', 'xMun_E11', 'UF_E12', 'xLgr_E06', 'cMun_E10')" maxlength="12">
                     <label for="CEP_E13">CEP</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="input-group mb-3 col">
+                <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                <div class="form-floating">
+                    <input type="text" class="form-control validate-form" id="xMun_E11" name="xMun_E11">
+                    <label for="xMun_E11">Município</label>
+                </div>
+            </div>
+
+            <div class="input-group mb-3 col">
+                <span class="input-group-text"><i class="bi bi-globe-americas"></i></span>
+                <div class="form-floating">
+                    <input type="text" class="form-control validate-form" id="UF_E12" name="UF_E12">
+                    <label for="UF_E12">Estado</label>
                 </div>
             </div>
 
@@ -76,18 +85,10 @@
             </div>
 
             <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="xMun_E11" name="xMun_E11">
-                    <label for="xMun_E11">Município</label>
-                </div>
-            </div>
-
-            <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-123"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" onkeypress="return apenasNumeros();" id="cMun_E10"
-                        name="cMun_E10">
+                    <input type="text" class="form-control validate-form" onkeypress="return apenasNumeros();"
+                        id="cMun_E10" name="cMun_E10">
                     <label for="cMun_E10">Código Município</label>
                 </div>
             </div>

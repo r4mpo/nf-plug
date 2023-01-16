@@ -32,3 +32,7 @@ e também para facilitar a experiência do usuário ao preencher os campos nos f
 5. Em casos de servidores Línux, não se esqueça de liberar as permissões de gravação (777) em 
 'wp-content/plugins/nf-plug/includes/form/tx2', para que os arquivos tx2 possam ficar salvos normalmente
 no momento da geração dos mesmos.
+
+--------------
+
+6. A respeito do auto-preenchimento de cnpj/cpf no formulário de emissão da NF-e (...)

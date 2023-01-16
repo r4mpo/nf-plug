@@ -35,17 +35,18 @@ $orders = wc_get_orders( array( 'status' => 'completed' ) );
 								<tr>
 									<th>#</th>
 									<th>Cliente</th>
-									<th>Data</th>
+									<th>Data do pedido</th>
 									<th>Total</th>
 									<th>NF-e</th>
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach($orders as $order): ?>
+								<?php foreach ($orders as $order):
+									// var_dump($order->data['date_created']);?>
 								<tr>
 									<th scope="row"><?php echo $order->get_id(); ?></th>
 									<td><?php echo $order->get_user()->display_name; ?></td>
-									<td><?php echo date('d/m/Y', strtotime($order->get_date_created())); ?></td>
+									<td><?php echo date('d/m/Y H:i:s', strtotime($order->data['date_created']->date)); ?></td>
 									<td class="money">R$ <?php echo $order->get_total(); ?></td>
 									<td>
 										<a href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>'><button type="button" class="btn btn-dark"><i class="fa fa-file-text"></i>

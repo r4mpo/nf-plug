@@ -1,7 +1,7 @@
 window.onload = function () {
 
-    viaCep('CEP_E13', 'xBairro_E09', 'xMun_E11', 'UF_E12', 'xLgr_E06');
-    viaCep('CEP_C13', 'xBairro_C09', 'xMun_C11', 'UF_C12', 'xLgr_C06');
+    viaCep('CEP_E13', 'xBairro_E09', 'xMun_E11', 'UF_E12', 'xLgr_E06', 'cMun_E10');
+    viaCep('CEP_C13', 'xBairro_C09', 'xMun_C11', 'UF_C12', 'xLgr_C06', 'cMun_C10');
 
     camposMoeda = Array.prototype.slice.call(document.getElementsByClassName('formatar-moeda'), 0);
     camposMoeda.forEach(element => {
@@ -36,7 +36,7 @@ function contandoCasasDecimais(el) {
 }
 
 // ViaCep
-const viaCep = async (cep, bairro, municipio, estado, logradouro) => {
+const viaCep = async (cep, bairro, municipio, estado, logradouro, cod_municipio) => {
     if (document.getElementById(cep).value.length == 8) {
         const response = await fetch(`https://viacep.com.br/ws/${document.getElementById(cep).value}/json/`)
         const data = await response.json();
@@ -46,6 +46,7 @@ const viaCep = async (cep, bairro, municipio, estado, logradouro) => {
             document.getElementById(municipio).value = data.localidade;
             document.getElementById(estado).value = data.uf;
             document.getElementById(logradouro).value = data.logradouro;
+            document.getElementById(cod_municipio).value = data.ibge;
         }
     }
 }

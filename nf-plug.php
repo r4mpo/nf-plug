@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Plugin Name: Nf-plug
+* Plugin Name: NF-e PLUG
 * Plugin URI: 
 * Description: Extensão de WooCommerce para geração de NF-e nos pedidos dos clientes.
 * Version: 0.0.1
@@ -18,7 +18,7 @@ if (!defined('nf_plug_VERSION')) {
 }
 
 if (!defined('nf_plug_NAME')) {
-    define('nf_plug_NAME', 'nf plug');
+    define('nf_plug_NAME', 'NF-e PLUG');
 }
 
 if (!defined('nf_plug_PLUGIN_SLUG')) {
