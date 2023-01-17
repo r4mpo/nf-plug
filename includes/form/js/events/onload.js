@@ -5,11 +5,20 @@ window.onload = function () {
 
     camposMoeda = Array.prototype.slice.call(document.getElementsByClassName('formatar-moeda'), 0);
     camposMoeda.forEach(element => {
-        formatarMoeda(element);
+        formatarMoedaOnLoad(element);
     });
 }
 
 // Moedas
+function formatarMoedaOnLoad(el) {
+    if (validandoMoeda(el.value)) {
+        el.value = parseInt((el.value).replace(/[^0-9]/g, ''));
+        el.value = contandoCasasDecimais('R$ ' + (divididoPorCem(el.value)).toString().replace(".", ","));
+    } else {
+        el.value = '';
+    }
+}
+
 function formatarMoeda(el) {
     if (validandoMoeda(el.value)) {
         el.value = parseInt((el.value).replace(/[^0-9]/g, ''));
@@ -18,20 +27,32 @@ function formatarMoeda(el) {
         el.value = '';
     }
 }
+
 function validandoMoeda(el) {
-    if (parseInt((el).replace(/[^0-9]/g, '')) || el.substr(-1, 1) == '0') {
+    if (parseInt((el).replace(/[^0-9]/g, '')) != 'NaN' || el.substr(-1, 1) == '0') {
         return true;
     }
 }
 
+function divididoPorCem(el) {
+    
+    if(el.length > 2)
+    {
+        el = parseInt(el) / 100
+    }
+
+    return el;
+}
+
 function contandoCasasDecimais(el) {
     if (!el.includes(',')) {
-        return el + ',00';
+        el = el + ',00';
     }
 
     if (el.toString().split(',')[1].length == 1) {
-        return el + '0';
+        el = el + '0';
     }
+    
     return el;
 }
 
