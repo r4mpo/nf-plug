@@ -12,11 +12,29 @@ window.onload = function () {
 // Moedas
 function formatarMoedaOnLoad(el) {
     if (validandoMoeda(el.value)) {
+        decimal = verificandoExistenciaDaVirgula(el.value);
         el.value = parseInt((el.value).replace(/[^0-9]/g, ''));
-        el.value = contandoCasasDecimais('R$ ' + (divididoPorCem(el.value)).toString().replace(".", ","));
+        el.value = contandoCasasDecimais('R$ ' + (multiplicandoDecimalPorCem(el.value, decimal)).toString().replace(".", ","));
     } else {
         el.value = '';
     }
+}
+
+function verificandoExistenciaDaVirgula(el) {
+    if (el.includes(',') || (el.includes('.'))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function multiplicandoDecimalPorCem(el, decimal) {
+
+    if (decimal) {
+        el = parseInt(el) / 100
+    }
+
+    return el;
 }
 
 function formatarMoeda(el) {
@@ -35,9 +53,8 @@ function validandoMoeda(el) {
 }
 
 function divididoPorCem(el) {
-    
-    if(el.length > 2)
-    {
+
+    if (el.length > 2) {
         el = parseInt(el) / 100
     }
 
@@ -52,17 +69,28 @@ function contandoCasasDecimais(el) {
     if (el.toString().split(',')[1].length == 1) {
         el = el + '0';
     }
-    
+
     return el;
 }
 
 // ViaCep
 const viaCep = async (cep, bairro, municipio, estado, logradouro, cod_municipio) => {
     if (document.getElementById(cep).value.length == 8) {
+
         const response = await fetch(`https://viacep.com.br/ws/${document.getElementById(cep).value}/json/`)
         const data = await response.json();
 
-        if (data != null) {
+        if (data.erro == true) {
+            alert('O CEP digitado é inválido');
+
+            document.getElementById(bairro).value = '';
+            document.getElementById(municipio).value = '';
+            document.getElementById(estado).value = '';
+            document.getElementById(logradouro).value = '';
+            document.getElementById(cod_municipio).value = '';
+        }
+
+        else {
             document.getElementById(bairro).value = data.bairro;
             document.getElementById(municipio).value = data.localidade;
             document.getElementById(estado).value = data.uf;

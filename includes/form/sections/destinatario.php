@@ -31,21 +31,22 @@
             </div>
 
             <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-house"></i></span>
-                <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="nro_E07" name="nro_E07"
-                        onkeypress="return apenasNumeros();" value="<?php echo $order->get_meta_data()[6]->value; ?>">
-                    <label for="nro_E07">Nº Residência</label>
-                </div>
-            </div>
-
-            <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-map"></i></span>
                 <div class="form-floating">
                     <input type="text" class="form-control validate-form" id="CEP_E13" name="CEP_E13"
                         value="<?php echo $order->shipping_postcode; ?>" onkeypress="return apenasNumeros();"
-                        onkeyup="viaCep('CEP_E13', 'xBairro_E09', 'xMun_E11', 'UF_E12', 'xLgr_E06', 'cMun_E10')" maxlength="12">
+                        onkeyup="viaCep('CEP_E13', 'xBairro_E09', 'xMun_E11', 'UF_E12', 'xLgr_E06', 'cMun_E10')"
+                        maxlength="12">
                     <label for="CEP_E13">CEP</label>
+                </div>
+            </div>
+
+            <div class="input-group mb-3 col">
+                <span class="input-group-text"><i class="bi bi-123"></i></span>
+                <div class="form-floating">
+                    <input type="text" class="form-control validate-form" onkeypress="return apenasNumeros();"
+                        id="cMun_E10" name="cMun_E10">
+                    <label for="cMun_E10">Código Município</label>
                 </div>
             </div>
         </div>
@@ -77,19 +78,19 @@
             </div>
 
             <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-map-fill"></i></span>
+                <span class="input-group-text"><i class="bi bi-house"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="xBairro_E09" name="xBairro_E09">
-                    <label for="xBairro_E09">Bairro</label>
+                    <input type="text" class="form-control validate-form" id="nro_E07" name="nro_E07"
+                        onkeypress="return apenasNumeros();" value="<?php echo $order->get_meta_data()[6]->value; ?>">
+                    <label for="nro_E07">Nº Residência</label>
                 </div>
             </div>
 
             <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-123"></i></span>
+                <span class="input-group-text"><i class="bi bi-map-fill"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" onkeypress="return apenasNumeros();"
-                        id="cMun_E10" name="cMun_E10">
-                    <label for="cMun_E10">Código Município</label>
+                    <input type="text" class="form-control validate-form" id="xBairro_E09" name="xBairro_E09">
+                    <label for="xBairro_E09">Bairro</label>
                 </div>
             </div>
 

@@ -20,7 +20,8 @@ function validarFormulario() {
     configs.forEach(element => {
         if ((element.value).length == 0) {
             erros++;
-            return alert('Erro. Você deve preencher as informações iniciais.');
+            alert('Erro. Você deve preencher as informações iniciais.');
+            exit;
         }
     });
 
