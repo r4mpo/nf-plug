@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../../../../wp-admin/admin.php';
-$orders = wc_get_orders( array( 'status' => 'completed' ) );
+$orders = wc_get_orders(array('status' => 'completed'));
 ?>
 
 <!doctype html>
@@ -43,16 +43,25 @@ $orders = wc_get_orders( array( 'status' => 'completed' ) );
 							<tbody>
 								<?php foreach ($orders as $order):
 									// var_dump($order->data['date_created']);?>
-								<tr>
-									<th scope="row"><?php echo $order->get_id(); ?></th>
-									<td><?php echo $order->get_user()->display_name; ?></td>
-									<td><?php echo date('d/m/Y H:i:s', strtotime($order->data['date_created']->date)); ?></td>
-									<td class="money">R$ <?php echo $order->get_total(); ?></td>
-									<td>
-										<a href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>'><button type="button" class="btn btn-dark"><i class="fa fa-file-text"></i>
-										</button></a>
-									</td>
-								</tr>
+									<tr>
+										<th scope="row">
+											<?php echo $order->get_id(); ?>
+										</th>
+										<td>
+											<?php echo $order->get_user()->display_name; ?>
+										</td>
+										<td>
+											<?php echo wc_format_datetime($order->get_date_created(), 'd/m/Y') . ' às ' . wc_format_datetime($order->get_date_created(), 'h:i:s'); ?>
+										</td>
+										<td class="money">R$
+											<?php echo $order->get_total(); ?>
+										</td>
+										<td>
+											<a href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>'><button
+													type="button" class="btn btn-dark"><i class="fa fa-file-text"></i>
+												</button></a>
+										</td>
+									</tr>
 								<?php endforeach; ?>
 							</tbody>
 						</table>
@@ -68,4 +77,5 @@ $orders = wc_get_orders( array( 'status' => 'completed' ) );
 	<script src="js/main.js"></script>
 
 </body>
+
 </html>

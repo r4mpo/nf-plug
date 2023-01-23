@@ -33,6 +33,14 @@ if (!defined('nf_plug_PLUGIN_DIR')) {
     define('nf_plug_PLUGIN_DIR', plugin_dir_path(__FILE__));
 }
 
+/****** DESATIVAÇÃO DO PLUGIN  *********/
+register_deactivation_hook( __FILE__, 'desativando_nfe_plug' );
+
+function desativando_nfe_plug() {
+    delete_option('nf_plug_dados');
+}
+
+// Executar ao acessar painel adm
 if (is_admin())
     add_action( 'after_setup_theme', function()
     {

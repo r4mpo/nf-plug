@@ -43,3 +43,5 @@ no momento da geração dos mesmos.
 códigos válidos, sem pontuações (apenas números).
 
 ------------
+
+8. No que diz respeito à desinstalação, é interessante incluir no final do arquivo wp-config.php o seguinte trecho de código: "define('WC_REMOVE_ALL_DATA', true);". Caso você esteja baixando o plugin pelo repositório do github, recomendamos que exclua os diretórios .git e .vscode. Dessa forma, a desinstalação deve ocorrer com êxtio.
