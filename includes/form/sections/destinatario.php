@@ -3,23 +3,28 @@
     <div class="container text-center">
         <h5>Destinatário</h5>
         <div class="row">
+
+        <?php if ($order->get_meta('_billing_cnpj', true) != ""): ?>
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-file-text"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" maxlength="15" id="CNPJ_E02"
+                    <input type="text" value="<?php echo $order->get_meta('_billing_cnpj', true); ?>" class="form-control validate-form" maxlength="15" id="CNPJ_E02"
                         onkeypress="return apenasNumeros();" name="CNPJ_E02">
                     <label for="CNPJ_E02">CNPJ</label>
                 </div>
             </div>
+            <?php endif; ?>
 
+            <?php if ($order->get_meta('_billing_cpf', true) != ""): ?>
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-file-text"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="CPF_E03"
+                    <input type="text" value="<?php echo $order->get_meta('_billing_cpf', true); ?> class="form-control validate-form" id="CPF_E03"
                         onkeydown="javascript: fMasc( this, mCPF );" maxlength="14" name="CPF_E03">
                     <label for="CPF_E03">CPF</label>
                 </div>
             </div>
+            <?php endif; ?>
 
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-people-fill"></i></span>
@@ -29,6 +34,10 @@
                     <label for="xNome_E04">Nome</label>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
+
 
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-map"></i></span>
@@ -49,9 +58,6 @@
                     <label for="cMun_E10">Código Município</label>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
 
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
@@ -68,7 +74,9 @@
                     <label for="UF_E12">Estado</label>
                 </div>
             </div>
+        </div>
 
+        <div class="row">
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-pin-map"></i></span>
                 <div class="form-floating">
@@ -83,6 +91,14 @@
                     <input type="text" class="form-control validate-form" id="nro_E07" name="nro_E07"
                         onkeypress="return apenasNumeros();" value="<?php echo $order->get_meta_data()[6]->value; ?>">
                     <label for="nro_E07">Nº Residência</label>
+                </div>
+            </div>
+
+            <div class="input-group mb-3 col">
+                <span class="input-group-text"><i class="bi bi-clipboard2-plus"></i></span>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="xCpl_E08" name="xCpl_E08">
+                    <label for="xCpl_E08">Complemento</label>
                 </div>
             </div>
 

@@ -20,7 +20,7 @@ dados também para o formulário do arquivo tx2.
 
 ---------------
 
-4. Em configurações > nf plug, definir as informações 
+4. Em configurações > NF-e PLUG, definir as informações 
 padrões que serão enviadas para o formulário de emissão
 da nota fiscal, como o CEST, CNPJ do administrador, etc.
 
@@ -36,3 +36,10 @@ no momento da geração dos mesmos.
 --------------
 
 6. A respeito do auto-preenchimento de cnpj/cpf no formulário de emissão da NF-e (...)
+
+-------------
+
+7. Este componente utiliza os códigos SKU do produto como códigos de barras, então sempre preencha com 
+códigos válidos, sem pontuações (apenas números).
+
+------------

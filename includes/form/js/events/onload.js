@@ -1,4 +1,5 @@
 window.onload = function () {
+    habilitandoInscricaoEstadual(document.getElementById('INDIEDEST_E16A'), 'IE_E17');
 
     viaCep('CEP_E13', 'xBairro_E09', 'xMun_E11', 'UF_E12', 'xLgr_E06', 'cMun_E10');
     viaCep('CEP_C13', 'xBairro_C09', 'xMun_C11', 'UF_C12', 'xLgr_C06', 'cMun_C10');
@@ -41,6 +42,7 @@ function formatarMoeda(el) {
     if (validandoMoeda(el.value)) {
         el.value = parseInt((el.value).replace(/[^0-9]/g, ''));
         el.value = contandoCasasDecimais('R$ ' + (parseInt(el.value) / 100).toString().replace(".", ","));
+        el.value = (el.value).toString().replace("NaN", "0");
     } else {
         el.value = '';
     }
@@ -97,5 +99,15 @@ const viaCep = async (cep, bairro, municipio, estado, logradouro, cod_municipio)
             document.getElementById(logradouro).value = data.logradouro;
             document.getElementById(cod_municipio).value = data.ibge;
         }
+    }
+}
+
+function habilitandoInscricaoEstadual(indicador, inscricao_estadual){
+    if(indicador.value == '1'){
+        document.getElementById(inscricao_estadual).disabled = false;
+        document.getElementById(inscricao_estadual).classList.add('validate-form');
+    } else {
+        document.getElementById(inscricao_estadual).disabled = true;
+        document.getElementById(inscricao_estadual).classList.remove('validate-form');
     }
 }

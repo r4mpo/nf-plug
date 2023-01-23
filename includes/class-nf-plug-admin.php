@@ -48,20 +48,20 @@ if (!class_exists('nf_plug_admin')) {
 
         public function create_admin_page()
         {
-?>
-<!-- Formulário -->
-<div class="wrap">
-    <h1>Configurações da NF-e</h1>
-    <a href="../wp-content/plugins/nf-plug/includes/table/index.php" target="_blank" rel="noopener noreferrer">Acessar painel de emissão</a>
-    <form action="options.php" method="post">
+            ?>
+            <!-- Formulário -->
+            <div class="wrap">
+                <h1>Configurações da NF-e</h1>
+                <a href="../wp-content/plugins/nf-plug/includes/table/index.php" target="_blank" rel="noopener noreferrer">Acessar painel de emissão</a>
+                <form action="options.php" method="post">
+                    <?php
+                    settings_fields('nf_plug_dados_options');
+                    do_settings_sections('nf_plug_dados_admin');
+                    submit_button();
+                    ?>
+                </form>
+            </div>
         <?php
-            settings_fields('nf_plug_dados_options');
-            do_settings_sections('nf_plug_dados_admin');
-            submit_button();
-        ?>
-    </form>
-</div>
-<?php
         }
 
         public function page_init()
@@ -74,8 +74,8 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_section(
                 'setting_section_id_1',
-                'Headers',
-            null,
+                'Configurações',
+                null,
                 'nf_plug_dados_admin'
             );
 
@@ -88,17 +88,17 @@ if (!class_exists('nf_plug_admin')) {
             );
 
             add_settings_field(
-                'authorization',
-                'Authorization',
-                array($this, 'authorization_callback'),
+                'senha',
+                'Senha',
+                array($this, 'senha_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_1',
             );
 
             add_settings_section(
                 'setting_section_id_2',
-                'Body',
-            null,
+                'Corpo',
+                null,
                 'nf_plug_dados_admin'
             );
 
@@ -129,7 +129,7 @@ if (!class_exists('nf_plug_admin')) {
             add_settings_section(
                 'setting_section_id_3',
                 'Emitente',
-            null,
+                null,
                 'nf_plug_dados_admin'
             );
 
@@ -184,7 +184,7 @@ if (!class_exists('nf_plug_admin')) {
             add_settings_section(
                 'setting_section_id_4',
                 'Suporte técnico',
-            null,
+                null,
                 'nf_plug_dados_admin'
             );
 
@@ -214,7 +214,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_field(
                 'fone_ZD06',
-                'Telefone do responsável técnico',
+                'Tel. do responsável técnico',
                 array($this, 'fone_ZD06_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_4',
@@ -223,7 +223,7 @@ if (!class_exists('nf_plug_admin')) {
             add_settings_section(
                 'setting_section_id_5',
                 'Padronize campos do formulário',
-            null,
+                null,
                 'nf_plug_dados_admin'
             );
 
@@ -267,10 +267,34 @@ if (!class_exists('nf_plug_admin')) {
                 'setting_section_id_5',
             );
 
+            add_settings_field(
+                'base_calculo_icms',
+                'Base de cálculo ICMS (%)',
+                array($this, 'base_calculo_icms_callback'),
+                'nf_plug_dados_admin',
+                'setting_section_id_5',
+            );
+
+            add_settings_field(
+                'base_calculo_icms_st',
+                'Base de cálculo ICMS ST (%)',
+                array($this, 'base_calculo_icms_st_callback'),
+                'nf_plug_dados_admin',
+                'setting_section_id_5',
+            );
+
+            add_settings_field(
+                'metodo_pagamento',
+                'Método de pagamento',
+                array($this, 'metodo_pagamento_callback'),
+                'nf_plug_dados_admin',
+                'setting_section_id_5',
+            );
+
             add_settings_section(
                 'setting_section_id_6',
                 'Pré-definições',
-            null,
+                null,
                 'nf_plug_dados_admin'
             );
 
@@ -300,7 +324,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_field(
                 'tpImp_B21',
-                'Formato de Impressão do DANFE',
+                'Formato do danfe',
                 array($this, 'tpImp_B21_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_6',
@@ -348,7 +372,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_field(
                 'cDV_B23',
-                'Dígito Verificador da Chave de Acesso da NF-e',
+                'Dígito Verificador da NF-e',
                 array($this, 'cDV_B23_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_6',
@@ -356,7 +380,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_field(
                 'verProc_B27',
-                'Software responsável pela integração com a Tecnospeed',
+                'Aplicação',
                 array($this, 'verProc_B27_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_6',
@@ -372,15 +396,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_field(
                 'indTot_I17b',
-                'Indica se valor do Item (vProd) entra no valor total da NF-e (vProd)',
-                array($this, 'indTot_I17b_callback'),
-                'nf_plug_dados_admin',
-                'setting_section_id_6',
-            );
-
-            add_settings_field(
-                'indTot_I17b',
-                'Indica se valor do Item (vProd) entra no valor total da NF-e (vProd)',
+                'Indica se valor do item entra no valor total da NF-e',
                 array($this, 'indTot_I17b_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_6',
@@ -388,7 +404,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_field(
                 'CST_N12',
-                'Tributação do ICMS = 00',
+                'Tributação do ICMS',
                 array($this, 'CST_N12_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_6',
@@ -396,7 +412,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_field(
                 'vFCPST_W06a',
-                'Valor Total do FCP (Fundo de Combate à Pobreza) retido por substituição tributária',
+                'Valor total fundo de combate à pobreza retido por substituição tributária',
                 array($this, 'vFCPST_W06a_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_6',
@@ -404,7 +420,7 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_field(
                 'vFCPSTRet_W06b',
-                'Valor Total do FCP retido anteriormente por Substituição Tributária',
+                'Valor total fundo de combate à pobreza retido anteriormente por Substituição Tributária',
                 array($this, 'vFCPSTRet_W06b_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_6',
@@ -429,338 +445,354 @@ if (!class_exists('nf_plug_admin')) {
 
         public function content_type_callback()
         {
-            $value = isset($this->options['content_type']) ? esc_attr($this->options['content_type']) : 'application/json';
-?>
-<input type="text" id="content_type" name="nf_plug_dados[content_type]" value="<?php echo $value; ?>" />
-<?php
+            $value = isset($this->options['content_type']) ? esc_attr($this->options['content_type']) : 'application/x-www-form-urlencoded';
+            ?>
+            <input type="text" id="content_type" name="nf_plug_dados[content_type]" value="<?php echo $value; ?>" />
+        <?php
         }
 
-        public function authorization_callback()
+        public function senha_callback()
         {
-            $value = isset($this->options['authorization']) ? esc_attr($this->options['authorization']) : '';
-?>
-<input type="text" maxlength="14" id="authorization" name="nf_plug_dados[authorization]" value="<?php echo $value; ?>" />
-<?php
+            $value = isset($this->options['senha']) ? esc_attr($this->options['senha']) : '';
+            ?>
+            <input type="text" maxlength="14" id="senha" name="nf_plug_dados[senha]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function nome_callback()
         {
             $value = isset($this->options['nome']) ? esc_attr($this->options['nome']) : '';
-?>
-<input type="text" id="nome" name="nf_plug_dados[nome]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="nome" name="nf_plug_dados[nome]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function grupo_callback()
         {
             $value = isset($this->options['grupo']) ? esc_attr($this->options['grupo']) : '';
-?>
-<input type="text" maxlength="14" id="grupo" name="nf_plug_dados[grupo]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" maxlength="14" id="grupo" name="nf_plug_dados[grupo]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function cnpj_callback()
         {
             $value = isset($this->options['cnpj']) ? esc_attr($this->options['cnpj']) : '';
-?>
-<input type="text" id="cnpj" name="nf_plug_dados[cnpj]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="cnpj" name="nf_plug_dados[cnpj]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function CNPJ_C02_callback()
         {
             $value = isset($this->options['CNPJ_C02']) ? esc_attr($this->options['CNPJ_C02']) : '';
-?>
-<input type="text" id="CNPJ_C02" name="nf_plug_dados[CNPJ_C02]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="CNPJ_C02" name="nf_plug_dados[CNPJ_C02]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function nro_C07_callback()
         {
             $value = isset($this->options['nro_C07']) ? esc_attr($this->options['nro_C07']) : '';
-?>
-<input type="text" id="nro_C07" name="nf_plug_dados[nro_C07]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="nro_C07" name="nf_plug_dados[nro_C07]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function IE_C17_callback()
         {
             $value = isset($this->options['IE_C17']) ? esc_attr($this->options['IE_C17']) : '';
-?>
-<input type="text" id="IE_C17" name="nf_plug_dados[IE_C17]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="IE_C17" name="nf_plug_dados[IE_C17]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function cProd_I02_callback()
         {
             $value = isset($this->options['cProd_I02']) ? esc_attr($this->options['cProd_I02']) : '';
-?>
-<input type="text" id="cProd_I02" name="nf_plug_dados[cProd_I02]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="cProd_I02" name="nf_plug_dados[cProd_I02]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function CEST_I05c_callback()
         {
             $value = isset($this->options['CEST_I05c']) ? esc_attr($this->options['CEST_I05c']) : '';
-?>
-<input type="text" id="CEST_I05c" name="nf_plug_dados[CEST_I05c]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="CEST_I05c" name="nf_plug_dados[CEST_I05c]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function cNF_B03_callback()
         {
             $value = isset($this->options['cNF_B03']) ? esc_attr($this->options['cNF_B03']) : '';
-?>
-<input type="text" id="cNF_B03" name="nf_plug_dados[cNF_B03]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="cNF_B03" name="nf_plug_dados[cNF_B03]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function CNPJ_ZD02_callback()
         {
             $value = isset($this->options['CNPJ_ZD02']) ? esc_attr($this->options['CNPJ_ZD02']) : '';
-?>
-<input type="text" id="CNPJ_ZD02" name="nf_plug_dados[CNPJ_ZD02]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="CNPJ_ZD02" name="nf_plug_dados[CNPJ_ZD02]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function xContato_ZD04_callback()
         {
             $value = isset($this->options['xContato_ZD04']) ? esc_attr($this->options['xContato_ZD04']) : '';
-?>
-<input type="text" id="xContato_ZD04" name="nf_plug_dados[xContato_ZD04]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="xContato_ZD04" name="nf_plug_dados[xContato_ZD04]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function email_ZD05_callback()
         {
             $value = isset($this->options['email_ZD05']) ? esc_attr($this->options['email_ZD05']) : '';
-?>
-<input type="email" id="email_ZD05" name="nf_plug_dados[email_ZD05]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="email" id="email_ZD05" name="nf_plug_dados[email_ZD05]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function fone_ZD06_callback()
         {
             $value = isset($this->options['fone_ZD06']) ? esc_attr($this->options['fone_ZD06']) : '';
-?>
-<input type="text" id="fone_ZD06" name="nf_plug_dados[fone_ZD06]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="fone_ZD06" name="nf_plug_dados[fone_ZD06]" value="<?php echo $value; ?>" />
+        <?php
         }
 
 
         public function serie_B07_callback()
         {
             $value = isset($this->options['serie_B07']) ? esc_attr($this->options['serie_B07']) : '';
-?>
-<input type="text" id="serie_B07" name="nf_plug_dados[serie_B07]" value="<?php echo $value; ?>">
-<?php
+            ?>
+            <input type="text" id="serie_B07" name="nf_plug_dados[serie_B07]" value="<?php echo $value; ?>">
+        <?php
         }
 
         public function descricao_padrao_callback()
         {
             $value = isset($this->options['descricao_padrao']) ? esc_attr($this->options['descricao_padrao']) : '';
-?>
-<textarea id="descricao_padrao" name="nf_plug_dados[descricao_padrao]"><?php echo $value; ?></textarea>
-<?php
+            ?>
+            <textarea id="descricao_padrao" name="nf_plug_dados[descricao_padrao]"><?php echo $value; ?></textarea>
+        <?php
         }
 
         public function id_local_de_destino_callback()
         {
             $value = isset($this->options['id_local_de_destino']) ? esc_attr($this->options['id_local_de_destino']) : '';
-?>
-<select id="id_local_de_destino" name="nf_plug_dados[id_local_de_destino]">
-    <option selected value="">ID do Local de Destino</option>
-    <option <?php if ($value=="1"): ?> selected
-        <?php endif; ?> value="1">Operação interna
-    </option>
-    <option <?php if ($value=="2"): ?> selected
-        <?php endif; ?> value="2">Operação interestadual
-    </option>
-    <option <?php if ($value=="3"): ?> selected
-        <?php endif; ?> value="3">Operação com exterior
-    </option>
+            ?>
+            <select id="id_local_de_destino" name="nf_plug_dados[id_local_de_destino]">
+                <option selected value="">ID do Local de Destino</option>
+                <option <?php if ($value == "1"): ?> selected
+                    <?php endif; ?> value="1">Operação interna
+                </option>
+                <option <?php if ($value == "2"): ?> selected
+                    <?php endif; ?> value="2">Operação interestadual
+                </option>
+                <option <?php if ($value == "3"): ?> selected
+                    <?php endif; ?> value="3">Operação com exterior
+                </option>
 
-</select>
-<?php
+            </select>
+        <?php
         }
 
         public function modalidade_frete_callback()
         {
             $value = isset($this->options['modalidade_frete']) ? esc_attr($this->options['modalidade_frete']) : '';
-?>
-<select id="modalidade_frete" name="nf_plug_dados[modalidade_frete]">
-    <option selected value="">Modalidade do frete</option>
-    <option <?php if ($value=="0"): ?> selected
-        <?php endif; ?> value="0">Contratação do Frete por conta do Remetente (CIF)
-    </option>
-    <option <?php if ($value=="1"): ?> selected
-        <?php endif; ?> value="1">Contratação do Frete por conta do Destinatário (FOB)
-    </option>
-    <option <?php if ($value=="2"): ?> selected
-        <?php endif; ?> value="2">Contratação do Frete por conta de Terceiros
-    </option>
-    <option <?php if ($value=="3"): ?> selected
-        <?php endif; ?> value="3">Transporte Próprio por conta do Remetente
-    </option>
-    <option <?php if ($value=="4"): ?> selected
-        <?php endif; ?> value="4">Transporte Próprio por conta do Destinatário
-    </option>
-    <option <?php if ($value=="9"): ?> selected
-        <?php endif; ?> value="9">Sem Ocorrência de Transporte
-    </option>
+            ?>
+            <select id="modalidade_frete" name="nf_plug_dados[modalidade_frete]">
+                <option selected value="">Modalidade do frete</option>
+                <option <?php if ($value == "0"): ?> selected
+                    <?php endif; ?> value="0">Contratação do Frete por conta do Remetente (CIF)
+                </option>
+                <option <?php if ($value == "1"): ?> selected
+                    <?php endif; ?> value="1">Contratação do Frete por conta do Destinatário (FOB)
+                </option>
+                <option <?php if ($value == "2"): ?> selected
+                    <?php endif; ?> value="2">Contratação do Frete por conta de Terceiros
+                </option>
+                <option <?php if ($value == "3"): ?> selected
+                    <?php endif; ?> value="3">Transporte Próprio por conta do Remetente
+                </option>
+                <option <?php if ($value == "4"): ?> selected
+                    <?php endif; ?> value="4">Transporte Próprio por conta do Destinatário
+                </option>
+                <option <?php if ($value == "9"): ?> selected
+                    <?php endif; ?> value="9">Sem Ocorrência de Transporte
+                </option>
 
-</select>
-<?php
+            </select>
+        <?php
         }
 
         public function metodo_pagamento_callback()
         {
             $value = isset($this->options['metodo_pagamento']) ? esc_attr($this->options['metodo_pagamento']) : '';
-?>
-<select id="metodo_pagamento" name="nf_plug_dados[metodo_pagamento]">
-    <option selected value="">Selecione o método de pagamento</option>
-    <option <?php if ($value=="03"): ?> selected
-        <?php endif; ?> value="03">Cartão de crédito
-    </option>
-    <option <?php if ($value=="04"): ?> selected
-        <?php endif; ?> value="04">Cartão de débito
-    </option>
-    <option <?php if ($value=="15"): ?> selected
-        <?php endif; ?> value="15">Boleto Bancário
-    </option>
-    <option <?php if ($value=="16"): ?> selected
-        <?php endif; ?> value="16">Depósito Bancário
-    </option>
-</select>
-<?php
+            ?>
+            <select id="metodo_pagamento" name="nf_plug_dados[metodo_pagamento]">
+                <option selected value="">Selecione o método de pagamento</option>
+                <option <?php if ($value == "03"): ?> selected
+                    <?php endif; ?> value="03">Cartão de crédito
+                </option>
+                <option <?php if ($value == "04"): ?> selected
+                    <?php endif; ?> value="04">Cartão de débito
+                </option>
+                <option <?php if ($value == "15"): ?> selected
+                    <?php endif; ?> value="15">Boleto Bancário
+                </option>
+                <option <?php if ($value == "16"): ?> selected
+                    <?php endif; ?> value="16">Depósito Bancário
+                </option>
+            </select>
+        <?php
         }
 
         public function Formato_callback()
         {
             $value = isset($this->options['Formato']) ? esc_attr($this->options['Formato']) : 'tx2';
-?>
-<input type="text" id="Formato" name="nf_plug_dados[Formato]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="Formato" name="nf_plug_dados[Formato]" value="<?php echo $value; ?>" />
+        <?php
+        }
+
+        public function base_calculo_icms_callback()
+        {
+            $value = isset($this->options['base_calculo_icms']) ? esc_attr($this->options['base_calculo_icms']) : '';
+            ?>
+            <input type="text" id="base_calculo_icms" name="nf_plug_dados[base_calculo_icms]" value="<?php echo $value; ?>" />
+        <?php
+        }
+
+        public function base_calculo_icms_st_callback()
+        {
+            $value = isset($this->options['base_calculo_icms_st']) ? esc_attr($this->options['base_calculo_icms_st']) : '';
+            ?>
+            <input type="text" id="base_calculo_icms_st" name="nf_plug_dados[base_calculo_icms_st]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function numlote_callback()
         {
             $value = isset($this->options['numlote']) ? esc_attr($this->options['numlote']) : '0';
-?>
-<input type="text" id="numlote" name="nf_plug_dados[numlote]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="numlote" name="nf_plug_dados[numlote]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function versao_A02_callback()
         {
             $value = isset($this->options['versao_A02']) ? esc_attr($this->options['versao_A02']) : '4.00';
-?>
-<input type="text" id="versao_A02" name="nf_plug_dados[versao_A02]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="versao_A02" name="nf_plug_dados[versao_A02]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function tpImp_B21_callback()
         {
             $value = isset($this->options['tpImp_B21']) ? esc_attr($this->options['tpImp_B21']) : '0';
-?>
-<input type="text" id="tpImp_B21" name="nf_plug_dados[tpImp_B21]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="tpImp_B21" name="nf_plug_dados[tpImp_B21]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function tpEmis_B22_callback()
         {
             $value = isset($this->options['tpEmis_B22']) ? esc_attr($this->options['tpEmis_B22']) : '1';
-?>
-<input type="text" id="tpEmis_B22" name="nf_plug_dados[tpEmis_B22]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="tpEmis_B22" name="nf_plug_dados[tpEmis_B22]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function cDV_B23_callback()
         {
             $value = isset($this->options['cDV_B23']) ? esc_attr($this->options['cDV_B23']) : '0';
-?>
-<input type="text" id="cDV_B23" name="nf_plug_dados[cDV_B23]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="cDV_B23" name="nf_plug_dados[cDV_B23]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function tpAmb_B24_callback()
         {
             $value = isset($this->options['tpAmb_B24']) ? esc_attr($this->options['tpAmb_B24']) : '1';
-?>
-<input type="text" id="tpAmb_B24" name="nf_plug_dados[tpAmb_B24]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="tpAmb_B24" name="nf_plug_dados[tpAmb_B24]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function INDFINAL_B25A_callback()
         {
             $value = isset($this->options['INDFINAL_B25A']) ? esc_attr($this->options['INDFINAL_B25A']) : '1';
-?>
-<input type="text" id="INDFINAL_B25A" name="nf_plug_dados[INDFINAL_B25A]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="INDFINAL_B25A" name="nf_plug_dados[INDFINAL_B25A]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function verProc_B27_callback()
         {
             $value = isset($this->options['verProc_B27']) ? esc_attr($this->options['verProc_B27']) : 'nfplug_0.0.1';
-?>
-<input type="text" id="verProc_B27" name="nf_plug_dados[verProc_B27]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="verProc_B27" name="nf_plug_dados[verProc_B27]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function uTrib_I13_callback()
         {
             $value = isset($this->options['uTrib_I13']) ? esc_attr($this->options['uTrib_I13']) : 'UN';
-?>
-<input type="text" id="uTrib_I13" name="nf_plug_dados[uTrib_I13]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="uTrib_I13" name="nf_plug_dados[uTrib_I13]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function indTot_I17b_callback()
         {
             $value = isset($this->options['indTot_I17b']) ? esc_attr($this->options['indTot_I17b']) : '1';
-?>
-<input type="text" id="indTot_I17b" name="nf_plug_dados[indTot_I17b]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="indTot_I17b" name="nf_plug_dados[indTot_I17b]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function CST_N12_callback()
         {
             $value = isset($this->options['CST_N12']) ? esc_attr($this->options['CST_N12']) : '00';
-?>
-<input type="text" id="CST_N12" name="nf_plug_dados[CST_N12]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="CST_N12" name="nf_plug_dados[CST_N12]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function vFCPST_W06a_callback()
         {
             $value = isset($this->options['vFCPST_W06a']) ? esc_attr($this->options['vFCPST_W06a']) : '0.00';
-?>
-<input type="text" id="vFCPST_W06a" name="nf_plug_dados[vFCPST_W06a]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="vFCPST_W06a" name="nf_plug_dados[vFCPST_W06a]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function vFCPSTRet_W06b_callback()
         {
             $value = isset($this->options['vFCPSTRet_W06b']) ? esc_attr($this->options['vFCPSTRet_W06b']) : '0.00';
-?>
-<input type="text" id="vFCPSTRet_W06b" name="nf_plug_dados[vFCPSTRet_W06b]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="vFCPSTRet_W06b" name="nf_plug_dados[vFCPSTRet_W06b]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function NCM_I05_callback()
         {
             $value = isset($this->options['NCM_I05']) ? esc_attr($this->options['NCM_I05']) : '04021090';
-?>
-<input type="text" id="NCM_I05" name="nf_plug_dados[NCM_I05]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="NCM_I05" name="nf_plug_dados[NCM_I05]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function nNF_B08_callback()
         {
             $value = isset($this->options['nNF_B08']) ? esc_attr($this->options['nNF_B08']) : '0';
-?>
-<input type="text" id="nNF_B08" name="nf_plug_dados[nNF_B08]" value="<?php echo $value; ?>" />
-<?php
+            ?>
+            <input type="text" id="nNF_B08" name="nf_plug_dados[nNF_B08]" value="<?php echo $value; ?>" />
+        <?php
         }
 
         public function sanitize($input)
@@ -771,8 +803,8 @@ if (!class_exists('nf_plug_admin')) {
             if (isset($input['content_type']))
                 $new_input['content_type'] = sanitize_text_field($input['content_type']);
 
-            if (isset($input['authorization']))
-                $new_input['authorization'] = sanitize_text_field($input['authorization']);
+            if (isset($input['senha']))
+                $new_input['senha'] = sanitize_text_field($input['senha']);
 
             if (isset($input['nome']))
                 $new_input['nome'] = sanitize_text_field($input['nome']);
@@ -875,6 +907,12 @@ if (!class_exists('nf_plug_admin')) {
 
             if (isset($input['nNF_B08']))
                 $new_input['nNF_B08'] = sanitize_text_field($input['nNF_B08']);
+
+            if (isset($input['base_calculo_icms']))
+                $new_input['base_calculo_icms'] = sanitize_text_field($input['base_calculo_icms']);
+
+            if (isset($input['base_calculo_icms_st']))
+                $new_input['base_calculo_icms_st'] = sanitize_text_field($input['base_calculo_icms_st']);
 
             return $new_input;
         }

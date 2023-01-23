@@ -15,13 +15,23 @@
             </div>
         </div>
 
+        <div class="col-md">
+            <div class="form-floating">
+                <select class="form-select validate-form" onchange="habilitandoInscricaoEstadual(this, 'IE_E17')" id="INDIEDEST_E16A" name="INDIEDEST_E16A">
+                    <option value="1">Contribuinte ICMS</option>
+                    <option value="2">Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS</option>
+                    <option value="9">Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS</option>
+                </select>
+                <label for="INDIEDEST_E16A">Indicador da IE do Destinatário</label>
+            </div>
+        </div>
 
         <div class="input-group mb-3 col">
             <span class="input-group-text"><i class="bi bi-123"></i></span>
             <div class="form-floating">
-                <input type="text" class="form-control validate-form" id="INDIEDEST_E16A" name="INDIEDEST_E16A"
+                <input type="text" class="form-control validate-form" id="IE_E17" name="IE_E17"
                     onkeypress="return apenasNumeros();">
-                <label for="INDIEDEST_E16A">Código Inscrição Estadual (Destinatário)</label>
+                <label for="IE_E17">IE Destinatário</label>
             </div>
         </div>
 

@@ -22,10 +22,10 @@
                 </div>
             </div>
             <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-cash"></i></span>
+                <span class="input-group-text">%</span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form formatar-moeda" id="vBC_W03" value="0" name="vBC_W03"
-                        onkeyup="formatarMoeda(this);">
+                    <input type="text" class="form-control validate-form" id="vBC_W03" value="<?php echo $configuracoes['base_calculo_icms']; ?>" name="vBC_W03"
+                        onkeyup="">
                     <label for="vBC_W03">Base de cálculo ICMS</label>
                 </div>
             </div>
@@ -48,10 +48,10 @@
                 </div>
             </div>
             <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-cash"></i></span>
+                <span class="input-group-text">%</span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form formatar-moeda" id="vBCST_W05" name="vBCST_W05"
-                        onkeyup="formatarMoeda(this);" value="0">
+                    <input type="text" class="form-control validate-form" id="vBCST_W05" name="vBCST_W05"
+                        onkeyup="" value="<?php echo $configuracoes['base_calculo_icms_st']; ?>">
                     <label for="vBCST_W05">Base cálculo ICMS ST</label>
                 </div>
             </div>
@@ -150,20 +150,16 @@
                 <div class="form-floating">
                     <select id="tPag_YA02" name="tPag_YA02" class="form-select validate-form">
                         <option selected value="">Selecione o método de pagamento</option>
-                        <option <?php if ($configuracoes['metodo_pagamento']=="03" ): ?> selected ??php endif;
-                            ??
+                        <option <?php if ($configuracoes['metodo_pagamento']=="03" ): ?> selected 
                             <?php endif; ?> value="03">Cartão de crédito
                         </option>
-                        <option <?php if ($configuracoes['metodo_pagamento']=="04" ): ?> selected ??php endif;
-                            ??
+                        <option <?php if ($configuracoes['metodo_pagamento']=="04" ): ?> selected 
                             <?php endif; ?> value="04">Cartão de débito
                         </option>
-                        <option <?php if ($configuracoes['metodo_pagamento']=="15" ): ?> selected ??php endif;
-                            ??
+                        <option <?php if ($configuracoes['metodo_pagamento']=="15" ): ?> selected 
                             <?php endif; ?> value="15">Boleto Bancário
                         </option>
-                        <option <?php if ($configuracoes['metodo_pagamento']=="16" ): ?> selected ??php endif;
-                            ??
+                        <option <?php if ($configuracoes['metodo_pagamento']=="16" ): ?> selected
                             <?php endif; ?> value="16">Depósito Bancário
                         </option>
                     </select>

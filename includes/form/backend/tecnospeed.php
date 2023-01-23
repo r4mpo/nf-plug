@@ -1,18 +1,21 @@
 <?php
 /********** PEGANDO DADOS PARA INSERIR NOS CAMPOS DA API - tx2 ************/
-$txt = fopen(__DIR__ . "/../tx2/" . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s") . '.txt', "a");
+date_default_timezone_set('America/Sao_Paulo');
+$txt = fopen(__DIR__ . '/../tx2/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.txt', "a");
+// echo date("Y-m-d h_i_s", time());
+
 fwrite($txt, 'Formato=' . $_POST["Formato"]);
 fwrite($txt, '\nnumlote=' . $_POST["numlote"]);
 fwrite($txt, '\nINCLUIR');
 fwrite($txt, '\nId_A03=0'); // Este campo recebe o valor 0 pois se preenche automaticamente na API;
 fwrite($txt, '\nversao_A02=' . $_POST["versao_A02"]);
-fwrite($txt, '\ncUF_B02=' . $_POST["cUF_B02"]);
+fwrite($txt, '\ncUF_B02=' . substr($_POST['cMun_E10'], 0, 2)); // modificar
 fwrite($txt, '\ncNF_B03=' . $_POST["cNF_B03"]);
 fwrite($txt, '\nnatOp_B04=' . $_POST["natOp_B04"]);
 fwrite($txt, '\nmod_B06=' . $_POST["mod_B06"]);
 fwrite($txt, '\nserie_B07=' . $_POST["serie_B07"]);
 fwrite($txt, '\nnNF_B08=' . $_POST["nNF_B08"]);
-fwrite($txt, '\nDHEMI_B09=' . (date('Y-m-d') . 'T' . date('h:i:s')));
+fwrite($txt, '\nDHEMI_B09=' . (date('Y-m-d', time()) . 'T' . date('h:i:s', time()) . '-03:00'));
 fwrite($txt, '\ntpNF_B11=' . $_POST["tpNF_B11"]);
 fwrite($txt, '\nIDDEST_B11A=' . $_POST["IDDEST_B11A"]);
 fwrite($txt, '\ncMunFG_B12=' . $_POST["cMun_C10"]);
@@ -37,13 +40,14 @@ fwrite($txt, '\nUF_C12=' . $_POST["UF_C12"]);
 fwrite($txt, '\nCEP_C13=' . $_POST["CEP_C13"]);
 fwrite($txt, '\nfone_C16=' . $_POST["fone_C16"]);
 fwrite($txt, '\nIE_C17=' . $_POST["IE_C17"]);
-fwrite($txt, '\nCNPJ_E02=' . $_POST["CNPJ_E02"]);
+fwrite($txt, '\nCNPJ_E02=' . preg_replace('/\D/', '',$_POST["CNPJ_E02"]));
 fwrite($txt, '\nCPF_E03=' . preg_replace('/\D/', '', $_POST["CPF_E03"]));
 fwrite($txt, '\nIDESTRANGEIRO_E03A='); // colocar campo opcional no formulário
 fwrite($txt, '\nxNome_E04=' . $_POST["xNome_E04"]);
 fwrite($txt, '\nxLgr_E06=' . $_POST["xLgr_E06"]);
 fwrite($txt, '\nnro_E07=' . $_POST["nro_E07"]);
 fwrite($txt, '\nxBairro_E09=' . $_POST["xBairro_E09"]);
+fwrite($txt, '\nxCpl_E08=' . $_POST["xCpl_E08"]);
 fwrite($txt, '\ncMun_E10=' . $_POST["cMun_E10"]);
 fwrite($txt, '\nxMun_E11=' . $_POST["xMun_E11"]);
 fwrite($txt, '\nUF_E12=' . $_POST["UF_E12"]);
@@ -58,7 +62,7 @@ for ($i = 1; $i <= count($item); $i++) {
     fwrite($txt, '\nxProd_I04=' . $item[$i]["'xProd_I04'"]);
     fwrite($txt, '\nNCM_I05=' . $_POST["NCM_I05"]);
     fwrite($txt, '\nCEST_I05c=' . $_POST["CEST_I05c"]);
-    fwrite($txt, '\nCFOP_I08=' .  $_POST["cProd_I02"]);
+    fwrite($txt, '\nCFOP_I08=' . $_POST["cProd_I02"]);
     fwrite($txt, '\nuCom_I09=' . $item[$i]["'uCom_I09'"]);
     fwrite($txt, '\nqCom_I10=' . $item[$i]["'qCom_I10'"]);
     fwrite($txt, '\nvUnCom_I10a=' . (preg_replace('/\D/', '', $item[$i]["'vUnCom_I10a'"])) / 100);
@@ -93,41 +97,47 @@ fwrite($txt, '\nvOutro_W15=' . preg_replace('/\D/', '', $_POST["vOutro_W15"]) / 
 fwrite($txt, '\nvNF_W16=' . preg_replace('/\D/', '', $_POST["vNF_W16"]) / 100);
 fwrite($txt, '\nmodFrete_X02=' . $_POST["modFrete_X02"]);
 fwrite($txt, '\nINCLUIRPARTE=YA');
-fwrite($txt, '\ntPag_YA02=' . preg_replace('/\D/', '', $_POST["tPag_YA02"]) / 100);
+fwrite($txt, '\ntPag_YA02=' . preg_replace('/\D/', '', $_POST["tPag_YA02"]));
 fwrite($txt, '\nvPag_YA03=' . preg_replace('/\D/', '', $_POST["vPag_YA03"]) / 100);
 fwrite($txt, '\nSALVARPARTE=YA');
-fwrite($txt, '\nCNPJ_ZD02=' . $_POST["CNPJ_ZD02"]);
+fwrite($txt, '\nCNPJ_ZD02=' . preg_replace('/\D/', '', $_POST["CNPJ_ZD02"]));
 fwrite($txt, '\nxContato_ZD04=' . $_POST["xContato_ZD04"]);
 fwrite($txt, '\nemail_ZD05=' . $_POST["email_ZD05"]);
 fwrite($txt, '\nfone_ZD06=' . $_POST["fone_ZD06"]);
 fwrite($txt, '\ninfCpl_Z03=' . $_POST["infCpl_Z03"]);
 fwrite($txt, '\nSALVAR');
-$tx2 = str_replace('\n', '<br>', file_get_contents(__DIR__ . "/../tx2/" . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s") . '.txt'));
+$tx2 = str_replace('\n', '<br>', file_get_contents(__DIR__ . '/../tx2/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.txt'));
 
 
 /********** REQUISIÇÃO NA API - TECNOSPEED ************/
 
-$curl = curl_init();
-$cnpj = $_POST['cnpj'];
-$grupo = $_POST['grupo'];
-curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/envia",
-    CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_SSL_VERIFYPEER => 0,
-    CURLOPT_SSL_VERIFYHOST => 0,
-    /******* DEIXAR O AUTORIZATION DINAMICO */
-    CURLOPT_HTTPHEADER => array($_POST['content_type'], 'agilisparts 4u9p3x8ODUgu@'),
-    CURLOPT_POSTFIELDS => array($grupo, $cnpj, $tx2),
-    CURLOPT_TIMEOUT => 30,
-    CURLOPT_RETURNTRANSFER => true
-));
+// $cnpj = $_POST['cnpj'];
+// $grupo = $_POST['grupo'];
+// $senha = $_POST['senha'];
+// $nome = $_POST['nome'];
+// $autorização = base64_encode($nome . ':' . $senha);
 
-$response = json_decode(curl_exec($curl), true);
-$err = curl_error($curl);
-if ($err) 
-{
-    echo "cURL Error #:" . $err;
-}
+// $curl = curl_init();
+
+// curl_setopt_array($curl, array(
+//   CURLOPT_URL => 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/envia',
+//   CURLOPT_RETURNTRANSFER => true,
+//   CURLOPT_ENCODING => '',
+//   CURLOPT_MAXREDIRS => 10,
+//   CURLOPT_TIMEOUT => 0,
+//   CURLOPT_FOLLOWLOCATION => true,
+//   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//   CURLOPT_CUSTOMREQUEST => 'POST',
+//   CURLOPT_POSTFIELDS => "grupo=$grupo&cnpj=$cnpj&arquivo=$tx2",
+//   CURLOPT_HTTPHEADER => array(
+//     'Content-Type: application/x-www-form-urlencoded',
+//     'Authorization: Basic ' . $autorização, 
+//   ),
+// ));
+
+// $response = curl_exec($curl);
+
+// curl_close($curl);
+// echo $response;
 echo $tx2;
-curl_close($curl);
 ?>

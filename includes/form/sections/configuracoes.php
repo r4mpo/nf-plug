@@ -1,7 +1,7 @@
 <!-- Configurações -->
 <input type="hidden" class="validate-config" id="valorASerPago" value="<?php echo $order->get_total(); ?>">
 <input type="hidden" class="validate-config" name="content_type" value="<?php echo $configuracoes['content_type']; ?>">
-<input type="hidden" class="validate-config" name="authorization" value="<?php echo $configuracoes['authorization']; ?>">
+<input type="hidden" class="validate-config" name="senha" value="<?php echo $configuracoes['senha']; ?>">
 <input type="hidden" class="validate-config" name="nome" value="<?php echo $configuracoes['nome']; ?>">
 <input type="hidden" class="validate-config" name="grupo" value="<?php echo $configuracoes['grupo']; ?>">
 <input type="hidden" class="validate-config" name="cnpj" value="<?php echo $configuracoes['cnpj']; ?>">
