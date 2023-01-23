@@ -19,7 +19,7 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-file-text"></i></span>
                 <div class="form-floating">
-                    <input type="text" value="<?php echo $order->get_meta('_billing_cpf', true); ?> class="form-control validate-form" id="CPF_E03"
+                    <input type="text" value="<?php echo $order->get_meta('_billing_cpf', true); ?>" class="form-control validate-form" id="CPF_E03"
                         onkeydown="javascript: fMasc( this, mCPF );" maxlength="14" name="CPF_E03">
                     <label for="CPF_E03">CPF</label>
                 </div>
