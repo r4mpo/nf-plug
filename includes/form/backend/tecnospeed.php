@@ -1,8 +1,8 @@
 <?php
+
 /********** PEGANDO DADOS PARA INSERIR NOS CAMPOS DA API - tx2 ************/
 date_default_timezone_set('America/Sao_Paulo');
 $txt = fopen(__DIR__ . '/../tx2/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.txt', "a");
-// echo date("Y-m-d h_i_s", time());
 
 fwrite($txt, 'Formato=' . $_POST["Formato"]);
 fwrite($txt, '\nnumlote=' . $_POST["numlote"]);
@@ -40,8 +40,15 @@ fwrite($txt, '\nUF_C12=' . $_POST["UF_C12"]);
 fwrite($txt, '\nCEP_C13=' . $_POST["CEP_C13"]);
 fwrite($txt, '\nfone_C16=' . $_POST["fone_C16"]);
 fwrite($txt, '\nIE_C17=' . $_POST["IE_C17"]);
-fwrite($txt, '\nCNPJ_E02=' . preg_replace('/\D/', '',$_POST["CNPJ_E02"]));
-fwrite($txt, '\nCPF_E03=' . preg_replace('/\D/', '', $_POST["CPF_E03"]));
+
+if (isset($_POST["CNPJ_E02"])) {
+    fwrite($txt, '\nCNPJ_E02=' . preg_replace('/\D/', '', $_POST["CNPJ_E02"]));
+}
+
+if (isset($_POST["CPF_E03"])) {
+    fwrite($txt, '\nCPF_E03=' . preg_replace('/\D/', '', $_POST["CPF_E03"]));
+}
+
 fwrite($txt, '\nIDESTRANGEIRO_E03A='); // colocar campo opcional no formulário
 fwrite($txt, '\nxNome_E04=' . $_POST["xNome_E04"]);
 fwrite($txt, '\nxLgr_E06=' . $_POST["xLgr_E06"]);
