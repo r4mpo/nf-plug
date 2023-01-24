@@ -24,8 +24,8 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text">%</span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" id="vBC_W03" value="<?php echo $configuracoes['base_calculo_icms']; ?>" name="vBC_W03"
-                        onkeyup="">
+                    <input type="text" class="form-control validate-form" id="vBC_W03" value="0" name="vBC_W03"
+                    onkeyup="formatarMoeda(this);">
                     <label for="vBC_W03">Base de cálculo ICMS</label>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <span class="input-group-text">%</span>
                 <div class="form-floating">
                     <input type="text" class="form-control validate-form" id="vBCST_W05" name="vBCST_W05"
-                        onkeyup="" value="<?php echo $configuracoes['base_calculo_icms_st']; ?>">
+                        value="0" onkeyup="formatarMoeda(this);">
                     <label for="vBCST_W05">Base cálculo ICMS ST</label>
                 </div>
             </div>

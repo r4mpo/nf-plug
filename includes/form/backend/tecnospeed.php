@@ -81,8 +81,18 @@ for ($i = 1; $i <= count($item); $i++) {
     fwrite($txt, '\nindTot_I17b=' . $_POST["indTot_I17b"]);
     fwrite($txt, '\norig_N11=' . $item[$i]["'orig_N11'"]);
     fwrite($txt, '\nCST_N12=' . $_POST["CST_N12"]);
+    fwrite($txt, '\nmodBC_N13=' . $_POST["modBC_N13"]);
+    fwrite($txt, '\nvBC_N15=' . (preg_replace('/\D/', '', $item[$i]["'vBC_N15'"])) / 100);
+    fwrite($txt, '\npICMS_N16=' . $_POST["pICMS_N16"]);
+    fwrite($txt, '\nvICMS_N17=' . (preg_replace('/\D/', '', $item[$i]["'vICMS_N17'"])) / 100);
     fwrite($txt, '\nCST_Q06=' . $item[$i]["'CST_Q06'"]);
+    fwrite($txt, '\nvBC_Q07=' . (preg_replace('/\D/', '', $item[$i]["'vBC_Q07'"])) / 100);
+    fwrite($txt, '\npPIS_Q08=' . $item[$i]["'pPIS_Q08'"]);
+    fwrite($txt, '\nvPIS_Q09=' . (preg_replace('/\D/', '', $item[$i]["'vPIS_Q09'"])) / 100);
     fwrite($txt, '\nCST_S06=' . $item[$i]["'CST_S06'"]);
+    fwrite($txt, '\nvBC_S07=' . (preg_replace('/\D/', '', $item[$i]["'vBC_S07'"])) / 100);
+    fwrite($txt, '\npCOFINS_S08=' . $item[$i]["'pCOFINS_S08'"]);
+    fwrite($txt, '\nvCOFINS_S11=' . (preg_replace('/\D/', '', $item[$i]["'vCOFINS_S11'"])) / 100);
     fwrite($txt, '\nSALVARITEM');
 }
 fwrite($txt, '\nvBC_W03=' . preg_replace('/\D/', '', $_POST["vBC_W03"]) / 100);

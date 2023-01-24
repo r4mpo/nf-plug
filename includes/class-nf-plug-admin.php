@@ -52,7 +52,8 @@ if (!class_exists('nf_plug_admin')) {
             <!-- Formulário -->
             <div class="wrap">
                 <h1>Configurações da NF-e</h1>
-                <a href="../wp-content/plugins/nf-plug/includes/table/index.php" target="_blank" rel="noopener noreferrer">Acessar painel de emissão</a>
+                <a href="../wp-content/plugins/nf-plug/includes/table/index.php" target="_blank" rel="noopener noreferrer">Acessar
+                    painel de emissão</a>
                 <form action="options.php" method="post">
                     <?php
                     settings_fields('nf_plug_dados_options');
@@ -302,6 +303,14 @@ if (!class_exists('nf_plug_admin')) {
                 'Formato',
                 'Formato',
                 array($this, 'Formato_callback'),
+                'nf_plug_dados_admin',
+                'setting_section_id_6',
+            );
+
+            add_settings_field(
+                'mod_bc_icms',
+                'Modalidade de determinação da BC do ICMS',
+                array($this, 'mod_bc_icms_callback'),
                 'nf_plug_dados_admin',
                 'setting_section_id_6',
             );
@@ -586,14 +595,11 @@ if (!class_exists('nf_plug_admin')) {
             ?>
             <select id="id_local_de_destino" name="nf_plug_dados[id_local_de_destino]">
                 <option selected value="">ID do Local de Destino</option>
-                <option <?php if ($value == "1"): ?> selected
-                    <?php endif; ?> value="1">Operação interna
+                <option <?php if ($value == "1"): ?> selected <?php endif; ?> value="1">Operação interna
                 </option>
-                <option <?php if ($value == "2"): ?> selected
-                    <?php endif; ?> value="2">Operação interestadual
+                <option <?php if ($value == "2"): ?> selected <?php endif; ?> value="2">Operação interestadual
                 </option>
-                <option <?php if ($value == "3"): ?> selected
-                    <?php endif; ?> value="3">Operação com exterior
+                <option <?php if ($value == "3"): ?> selected <?php endif; ?> value="3">Operação com exterior
                 </option>
 
             </select>
@@ -606,23 +612,19 @@ if (!class_exists('nf_plug_admin')) {
             ?>
             <select id="modalidade_frete" name="nf_plug_dados[modalidade_frete]">
                 <option selected value="">Modalidade do frete</option>
-                <option <?php if ($value == "0"): ?> selected
-                    <?php endif; ?> value="0">Contratação do Frete por conta do Remetente (CIF)
+                <option <?php if ($value == "0"): ?> selected <?php endif; ?> value="0">Contratação do Frete por conta do Remetente
+                    (CIF)
                 </option>
-                <option <?php if ($value == "1"): ?> selected
-                    <?php endif; ?> value="1">Contratação do Frete por conta do Destinatário (FOB)
+                <option <?php if ($value == "1"): ?> selected <?php endif; ?> value="1">Contratação do Frete por conta do Destinatário
+                    (FOB)
                 </option>
-                <option <?php if ($value == "2"): ?> selected
-                    <?php endif; ?> value="2">Contratação do Frete por conta de Terceiros
+                <option <?php if ($value == "2"): ?> selected <?php endif; ?> value="2">Contratação do Frete por conta de Terceiros
                 </option>
-                <option <?php if ($value == "3"): ?> selected
-                    <?php endif; ?> value="3">Transporte Próprio por conta do Remetente
+                <option <?php if ($value == "3"): ?> selected <?php endif; ?> value="3">Transporte Próprio por conta do Remetente
                 </option>
-                <option <?php if ($value == "4"): ?> selected
-                    <?php endif; ?> value="4">Transporte Próprio por conta do Destinatário
+                <option <?php if ($value == "4"): ?> selected <?php endif; ?> value="4">Transporte Próprio por conta do Destinatário
                 </option>
-                <option <?php if ($value == "9"): ?> selected
-                    <?php endif; ?> value="9">Sem Ocorrência de Transporte
+                <option <?php if ($value == "9"): ?> selected <?php endif; ?> value="9">Sem Ocorrência de Transporte
                 </option>
 
             </select>
@@ -635,17 +637,13 @@ if (!class_exists('nf_plug_admin')) {
             ?>
             <select id="metodo_pagamento" name="nf_plug_dados[metodo_pagamento]">
                 <option selected value="">Selecione o método de pagamento</option>
-                <option <?php if ($value == "03"): ?> selected
-                    <?php endif; ?> value="03">Cartão de crédito
+                <option <?php if ($value == "03"): ?> selected <?php endif; ?> value="03">Cartão de crédito
                 </option>
-                <option <?php if ($value == "04"): ?> selected
-                    <?php endif; ?> value="04">Cartão de débito
+                <option <?php if ($value == "04"): ?> selected <?php endif; ?> value="04">Cartão de débito
                 </option>
-                <option <?php if ($value == "15"): ?> selected
-                    <?php endif; ?> value="15">Boleto Bancário
+                <option <?php if ($value == "15"): ?> selected <?php endif; ?> value="15">Boleto Bancário
                 </option>
-                <option <?php if ($value == "16"): ?> selected
-                    <?php endif; ?> value="16">Depósito Bancário
+                <option <?php if ($value == "16"): ?> selected <?php endif; ?> value="16">Depósito Bancário
                 </option>
             </select>
         <?php
@@ -656,6 +654,14 @@ if (!class_exists('nf_plug_admin')) {
             $value = isset($this->options['Formato']) ? esc_attr($this->options['Formato']) : 'tx2';
             ?>
             <input type="text" id="Formato" name="nf_plug_dados[Formato]" value="<?php echo $value; ?>" />
+        <?php
+        }
+
+        public function mod_bc_icms_callback()
+        {
+            $value = isset($this->options['mod_bc_icms']) ? esc_attr($this->options['mod_bc_icms']) : '0';
+            ?>
+            <input type="text" id="mod_bc_icms" name="nf_plug_dados[mod_bc_icms]" value="<?php echo $value; ?>" />
         <?php
         }
 
@@ -834,7 +840,10 @@ if (!class_exists('nf_plug_admin')) {
                 $new_input['cNF_B03'] = sanitize_text_field($input['cNF_B03']);
 
             if (isset($input['Formato']))
-                $new_input['Formato'] = 'tx2';
+                $new_input['Formato'] = sanitize_text_field($input['Formato']);
+
+            if (isset($input['mod_bc_icms']))
+                $new_input['mod_bc_icms'] = sanitize_text_field($input['mod_bc_icms']);
 
             if (isset($input['numlote']))
                 $new_input['numlote'] = sanitize_text_field($input['numlote']);

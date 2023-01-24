@@ -33,3 +33,6 @@
 <input type="hidden" class="validate-config" name="serie_B07" value="<?php echo $configuracoes['serie_B07']; ?>">
 <input type="hidden" class="validate-config" name="nNF_B08" value="<?php echo $configuracoes['nNF_B08']; ?>">
 <input type="hidden" class="validate-config" name="numero_do_pedido_woocommerce" value="<?php echo $id; ?>">
+<input type="hidden" class="validate-config" name="pICMS_N16" value="<?php echo $configuracoes['base_calculo_icms']; ?>">
+<!-- <input type="hidden" class="validate-config" name="vBCST_N21" value="<?php echo $configuracoes['base_calculo_icms_st']; ?>"> -->
+<input type="hidden" class="validate-config" name="modBC_N13" value="<?php echo $configuracoes['mod_bc_icms']; ?>">

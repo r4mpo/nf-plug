@@ -11,7 +11,8 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text"><i class="bi bi-upc-scan"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control validate-form" id="item[<?php echo $contador; ?>]['cEAN_I03']"
+                        <input type="text" class="form-control validate-form"
+                            id="item[<?php echo $contador; ?>]['cEAN_I03']"
                             value="<?php echo wc_get_product($item->get_product_id())->get_sku(); ?>"
                             name="item[<?php echo $contador; ?>]['cEAN_I03']" onkeypress="return apenasNumeros();">
                         <label for="item[<?php echo $contador; ?>]['cEAN_I03']">Código de barras</label>
@@ -20,7 +21,8 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text"><i class="bi bi-coin"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control validate-form formatar-moeda" id="item[<?php echo $contador; ?>]['vUnTrib_I14a']"
+                        <input type="text" class="form-control validate-form formatar-moeda"
+                            id="item[<?php echo $contador; ?>]['vUnTrib_I14a']"
                             name="item[<?php echo $contador; ?>]['vUnTrib_I14a']" value="0" onkeyup="formatarMoeda(this);">
                         <label for="item[<?php echo $contador; ?>]['vUnTrib_I14a']">Valor tributo unitário</label>
                     </div>
@@ -28,17 +30,17 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text"><i class="bi bi-regex"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control validate-form" id="item[<?php echo $contador; ?>]['nItem_H02']"
-                            value="<?php echo $contador; ?>" onkeypress="return apenasNumeros();"
-                            name="item[<?php echo $contador; ?>]['nItem_H02']">
+                        <input type="text" class="form-control validate-form"
+                            id="item[<?php echo $contador; ?>]['nItem_H02']" value="<?php echo $contador; ?>"
+                            onkeypress="return apenasNumeros();" name="item[<?php echo $contador; ?>]['nItem_H02']">
                         <label for="item[<?php echo $contador; ?>]['nItem_H02']">ID do Produto</label>
                     </div>
                 </div>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text"><i class="bi bi-coin"></i></span>
                     <div class="form-floating">
-                        <input type="text"
-                            class="form-control validate-form formatar-moeda" id=" item[<?php echo $contador; ?>]['vUnCom_I10a']"
+                        <input type="text" class="form-control validate-form formatar-moeda"
+                            id=" item[<?php echo $contador; ?>]['vUnCom_I10a']"
                             name="item[<?php echo $contador; ?>]['vUnCom_I10a']" onkeyup="formatarMoeda(this);"
                             value="<?php echo $item->get_product()->get_price(); ?>">
                         <label for="item[<?php echo $contador; ?>]['vUnCom_I10a']">Valor Un. Produto</label>
@@ -114,17 +116,6 @@ foreach ($order->get_items() as $item_key => $item): ?>
                             COFINS</label>
                     </div>
                 </div>
-            </div>
-            <div class="row bloc-section">
-                <div class="input-group mb-3 col">
-                    <span class="input-group-text"><i class="bi bi-clipboard-data"></i></span>
-                    <div class="form-floating">
-                        <input type="text" class="form-control validate-form" id="item[<?php echo $contador; ?>]['qCom_I10']"
-                            name="item[<?php echo $contador; ?>]['qCom_I10']" onkeypress="return apenasNumeros();"
-                            value="<?php echo $item->get_quantity(); ?>">
-                        <label for="item[<?php echo $contador; ?>]['qCom_I10']">Qtd. Produto</label>
-                    </div>
-                </div>
                 <div class="col-md">
                     <div class="form-floating">
                         <select class="form-select validate-form" id="item[<?php echo $contador; ?>]['uCom_I09']"
@@ -139,12 +130,107 @@ foreach ($order->get_items() as $item_key => $item): ?>
                         <label for="item[<?php echo $contador; ?>]['uCom_I09']">Tipo de unidade do produto</label>
                     </div>
                 </div>
+            </div>
+            <div class="row mt-3">
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-clipboard-data"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control validate-form"
+                            id="item[<?php echo $contador; ?>]['qCom_I10']"
+                            name="item[<?php echo $contador; ?>]['qCom_I10']" onkeypress="return apenasNumeros();"
+                            value="<?php echo $item->get_quantity(); ?>">
+                        <label for="item[<?php echo $contador; ?>]['qCom_I10']">Qtd. Produto</label>
+                    </div>
+                </div>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text"><i class="bi bi-pencil"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control validate-form" id="item[<?php echo $contador; ?>]['xProd_I04']"
+                        <input type="text" class="form-control validate-form"
+                            id="item[<?php echo $contador; ?>]['xProd_I04']"
                             name="item[<?php echo $contador; ?>]['xProd_I04']" value="<?php echo $item->get_name(); ?>">
                         <label for="item[<?php echo $contador; ?>]['xProd_I04']">Breve descrição do produto</label>
+                    </div>
+                </div>
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-coin"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control validate-form formatar-moeda"
+                            id="item[<?php echo $contador; ?>]['vBC_N15']" name="item[<?php echo $contador; ?>]['vBC_N15']"
+                            value="0" onkeyup="formatarMoeda(this);">
+                        <label for="item[<?php echo $contador; ?>]['vBC_N15']">Valor da BC do ICMS</label>
+                    </div>
+                </div>
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-coin"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control validate-form formatar-moeda"
+                            id="item[<?php echo $contador; ?>]['vICMS_N17']"
+                            name="item[<?php echo $contador; ?>]['vICMS_N17']" value="0" onkeyup="formatarMoeda(this);">
+                        <label for="item[<?php echo $contador; ?>]['vICMS_N17']">Valor do ICMS</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-coin"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control validate-form formatar-moeda"
+                            id="item[<?php echo $contador; ?>]['vBC_Q07']" name="item[<?php echo $contador; ?>]['vBC_Q07']"
+                            value="0" onkeyup="formatarMoeda(this);">
+                        <label for="item[<?php echo $contador; ?>]['vBC_Q07']">Valor da BC do PIS</label>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text">%</span>
+                    <div class="form-floating">
+                        <input type="text" value="0" class="form-control validate-form" maxlength="15" id="item[<?php echo $contador; ?>]['pPIS_Q08']"
+                            onkeypress="return apenasNumeros();" name="item[<?php echo $contador; ?>]['pPIS_Q08']">
+                        <label for="pPIS_Q08">Alíquota do PIS</label>
+                    </div>
+                </div>
+
+
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-coin"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control validate-form formatar-moeda"
+                            id="item[<?php echo $contador; ?>]['vPIS_Q09']"
+                            name="item[<?php echo $contador; ?>]['vPIS_Q09']" value="0" onkeyup="formatarMoeda(this);">
+                        <label for="item[<?php echo $contador; ?>]['vPIS_Q09']">Valor total do PIS</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-coin"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control validate-form formatar-moeda"
+                            id="item[<?php echo $contador; ?>]['vBC_S07']" name="item[<?php echo $contador; ?>]['vBC_S07']"
+                            value="0" onkeyup="formatarMoeda(this);">
+                        <label for="item[<?php echo $contador; ?>]['vBC_S07']">Valor da BC do COFINS</label>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text">%</span>
+                    <div class="form-floating">
+                        <input type="text" value="0" class="form-control validate-form" maxlength="15" id="item[<?php echo $contador; ?>]['pCOFINS_S08']"
+                            onkeypress="return apenasNumeros();" name="item[<?php echo $contador; ?>]['pCOFINS_S08']">
+                        <label for="pCOFINS_S08">Alíquota do COFINS</label>
+                    </div>
+                </div>
+
+
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-coin"></i></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control validate-form formatar-moeda"
+                            id="item[<?php echo $contador; ?>]['vCOFINS_S11']"
+                            name="item[<?php echo $contador; ?>]['vCOFINS_S11']" value="0" onkeyup="formatarMoeda(this);">
+                        <label for="item[<?php echo $contador; ?>]['vCOFINS_S11']">Valor total do COFINS</label>
                     </div>
                 </div>
             </div>
