@@ -4,33 +4,35 @@
         <h5>Destinatário</h5>
         <div class="row">
 
-        <?php if ($order->get_meta('_billing_cnpj', true) != ""): ?>
-            <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-file-text"></i></span>
-                <div class="form-floating">
-                    <input type="text" value="<?php echo $order->get_meta('_billing_cnpj', true); ?>" class="form-control validate-form" maxlength="15" id="CNPJ_E02"
-                        onkeypress="return apenasNumeros();" name="CNPJ_E02">
-                    <label for="CNPJ_E02">CNPJ</label>
+            <?php if ($order->get_meta('_billing_cnpj', true) != ""): ?>
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-file-text"></i></span>
+                    <div class="form-floating">
+                        <input type="text" value="<?php echo $order->get_meta('_billing_cnpj', true); ?>"
+                            class="form-control validate-form" maxlength="15" id="CNPJ_E02"
+                            onkeypress="return apenasNumeros();" name="CNPJ_E02">
+                        <label for="CNPJ_E02">CNPJ</label>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
 
             <?php if ($order->get_meta('_billing_cpf', true) != ""): ?>
-            <div class="input-group mb-3 col">
-                <span class="input-group-text"><i class="bi bi-file-text"></i></span>
-                <div class="form-floating">
-                    <input type="text" value="<?php echo $order->get_meta('_billing_cpf', true); ?>" class="form-control validate-form" id="CPF_E03"
-                        onkeydown="javascript: fMasc( this, mCPF );" maxlength="14" name="CPF_E03">
-                    <label for="CPF_E03">CPF</label>
+                <div class="input-group mb-3 col">
+                    <span class="input-group-text"><i class="bi bi-file-text"></i></span>
+                    <div class="form-floating">
+                        <input type="text" value="<?php echo $order->get_meta('_billing_cpf', true); ?>"
+                            class="form-control validate-form" id="CPF_E03" onkeydown="javascript: fMasc( this, mCPF );"
+                            maxlength="14" name="CPF_E03">
+                        <label for="CPF_E03">CPF</label>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
 
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-people-fill"></i></span>
                 <div class="form-floating">
                     <input type="text" class="form-control validate-form" id="xNome_E04" name="xNome_E04"
-                        value="<?php echo $order->get_user()->display_name; ?>">
+                        value="<?php echo $configuracoes['tpAmb_B24'] === '2' ? 'NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL' : $order->get_user()->display_name; ?>">
                     <label for="xNome_E04">Nome</label>
                 </div>
             </div>

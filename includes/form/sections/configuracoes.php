@@ -9,7 +9,6 @@
 <input type="hidden" class="validate-config" name="nro_C07" value="<?php echo $configuracoes['nro_C07']; ?>">
 <input type="hidden" class="validate-config" name="IE_C17" value="<?php echo $configuracoes['IE_C17']; ?>">
 <input type="hidden" class="validate-config" name="cProd_I02" value="<?php echo $configuracoes['cProd_I02']; ?>">
-<input type="hidden" class="validate-config" name="cNF_B03" value="<?php echo $configuracoes['cNF_B03']; ?>">
 <input type="hidden" class="validate-config" name="Formato" value="<?php echo $configuracoes['Formato']; ?>">
 <input type="hidden" class="validate-config" name="numlote" value="<?php echo $configuracoes['numlote']; ?>">
 <input type="hidden" class="validate-config" name="versao_A02" value="<?php echo $configuracoes['versao_A02']; ?>">

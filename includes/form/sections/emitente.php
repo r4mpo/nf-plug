@@ -6,8 +6,8 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-person-bounding-box"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control validate-form" value="<?php echo $adm->display_name; ?>"
-                        id="xNome_C03" name="xNome_C03">
+                    <input type="text" class="form-control validate-form" id="xNome_C03" name="xNome_C03"
+                        value="<?php echo $configuracoes['tpAmb_B24'] === '2' ? 'NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL' : $adm->display_name; ?>">
                     <label for="xNome_C03">Nome</label>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                     <input type="text" class="form-control validate-form" maxlength="12"
                         onkeypress="return apenasNumeros();"
                         value="<?php echo get_user_meta($adm->ID, 'shipping_postcode', true); ?>"
-                        onkeyup="viaCep('CEP_C13', 'xBairro_C09', 'xMun_C11', 'UF_C12', 'xLgr_C06', 'cMun_C10')" id="CEP_C13"
-                        name="CEP_C13">
+                        onkeyup="viaCep('CEP_C13', 'xBairro_C09', 'xMun_C11', 'UF_C12', 'xLgr_C06', 'cMun_C10')"
+                        id="CEP_C13" name="CEP_C13">
                     <label for="CEP_C13">CEP</label>
                 </div>
             </div>

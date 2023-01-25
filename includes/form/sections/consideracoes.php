@@ -193,6 +193,25 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="input-group mb-3 col">
+                <span class="input-group-text"><i class="bi bi-cash"></i></span>
+                <div class="form-floating">
+                    <input type="text" class="form-control validate-form formatar-moeda" id="vIPIDevol_W12a" value="0" name="vIPIDevol_W12a"
+                        onkeyup="formatarMoeda(this);">
+                    <label for="vIPIDevol_W12a">Valor Total do IPI Devolvido</label>
+                </div>
+            </div>
+            <div class="input-group mb-3 col">
+                <span class="input-group-text"><i class="bi bi-cash"></i></span>
+                <div class="form-floating">
+                    <input type="text" class="form-control validate-form formatar-moeda" id="vFCP_W04h" value="0" name="vFCP_W04h"
+                        onkeyup="formatarMoeda(this);">
+                    <label for="vFCP_W04h">Valor Total do Fundo de Combate à Pobreza</label>
+                </div>
+            </div>
+
+        </div>
         <div class="form-floating">
             <textarea class="form-control" id="infCpl_Z03" name="infCpl_Z03" style="height: 100px"><?php echo $configuracoes['descricao_padrao']; ?></textarea>
             <label for="description-nfe">Adicione uma descrição à sua NF-e</label>

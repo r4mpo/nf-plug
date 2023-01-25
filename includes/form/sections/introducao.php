@@ -3,6 +3,16 @@
     <div class="container text-center">
         <h5>Introdução</h5>
         <div class="row">
+        <div class="input-group mb-3 col">
+                <span class="input-group-text"><i class="bi bi-123"></i></span>
+                <div class="form-floating">
+                    <input type="text" onkeypress="return apenasNumeros();" value="<?php echo rand(1, 99999999); ?>"
+                        class="form-control validate-form" id="cNF_B03" name="cNF_B03">
+                    <label for="cNF_B03">Chave de acesso</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-123"></i></span>
                 <div class="form-floating">
@@ -85,9 +95,9 @@
             <div class="col-md">
                 <div class="form-floating">
                     <select class="form-select validate-form" id="procEmi_B26" name="procEmi_B26">
-                        <option value="0">Emissão de NF-e com aplicativo do contribuinte</option>
+                        <option selected value="0">Emissão de NF-e com aplicativo do contribuinte</option>
                         <option value="1">Emissão de NF-e avulsa pelo Fisco</option>
-                        <option selected value="2">Emissão de NF-e avulsa, pelo contribuinte com seu certificado
+                        <option value="2">Emissão de NF-e avulsa, pelo contribuinte com seu certificado
                             digital,
                             através do site do Fisco</option>
                         <option value="3">Emissão NF-e pelo contribuinte com aplicativo fornecido pelo Fisco.

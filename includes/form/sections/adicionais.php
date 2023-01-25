@@ -7,9 +7,9 @@
         <div class="col-md">
             <div class="form-floating">
                 <select class="form-select validate-form" id="CRT_C21" name="CRT_C21">
-                    <option selected value="1">Simples Nacional</option>
+                    <option value="1">Simples Nacional</option>
                     <option value="2">Simples Nacional, excesso sublimite de receita bruta</option>
-                    <option value="3">Regime Normal.</option>
+                    <option selected value="3">Regime Normal.</option>
                 </select>
                 <label for="CRT_C21">Código Regime Tributário</label>
             </div>

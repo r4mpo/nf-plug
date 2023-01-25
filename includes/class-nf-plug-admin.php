@@ -174,14 +174,6 @@ if (!class_exists('nf_plug_admin')) {
                 'setting_section_id_3',
             );
 
-            add_settings_field(
-                'cNF_B03',
-                'Chave de Acesso',
-                array($this, 'cNF_B03_callback'),
-                'nf_plug_dados_admin',
-                'setting_section_id_3',
-            );
-
             add_settings_section(
                 'setting_section_id_4',
                 'Suporte técnico',
@@ -532,14 +524,6 @@ if (!class_exists('nf_plug_admin')) {
         <?php
         }
 
-        public function cNF_B03_callback()
-        {
-            $value = isset($this->options['cNF_B03']) ? esc_attr($this->options['cNF_B03']) : '';
-            ?>
-            <input type="text" id="cNF_B03" name="nf_plug_dados[cNF_B03]" value="<?php echo $value; ?>" />
-        <?php
-        }
-
         public function CNPJ_ZD02_callback()
         {
             $value = isset($this->options['CNPJ_ZD02']) ? esc_attr($this->options['CNPJ_ZD02']) : '';
@@ -835,9 +819,6 @@ if (!class_exists('nf_plug_admin')) {
 
             if (isset($input['CEST_I05c']))
                 $new_input['CEST_I05c'] = sanitize_text_field($input['CEST_I05c']);
-
-            if (isset($input['cNF_B03']))
-                $new_input['cNF_B03'] = sanitize_text_field($input['cNF_B03']);
 
             if (isset($input['Formato']))
                 $new_input['Formato'] = sanitize_text_field($input['Formato']);

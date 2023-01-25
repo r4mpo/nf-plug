@@ -13,7 +13,7 @@ foreach ($order->get_items() as $item_key => $item): ?>
                     <div class="form-floating">
                         <input type="text" class="form-control validate-form"
                             id="item[<?php echo $contador; ?>]['cEAN_I03']"
-                            value="<?php echo wc_get_product($item->get_product_id())->get_sku(); ?>"
+                            value="<?php echo $configuracoes['tpAmb_B24'] === '2' ? 'SEM GTIN' : wc_get_product($item->get_product_id())->get_sku(); ?>"
                             name="item[<?php echo $contador; ?>]['cEAN_I03']" onkeypress="return apenasNumeros();">
                         <label for="item[<?php echo $contador; ?>]['cEAN_I03']">Código de barras</label>
                     </div>
@@ -23,7 +23,8 @@ foreach ($order->get_items() as $item_key => $item): ?>
                     <div class="form-floating">
                         <input type="text" class="form-control validate-form formatar-moeda"
                             id="item[<?php echo $contador; ?>]['vUnTrib_I14a']"
-                            name="item[<?php echo $contador; ?>]['vUnTrib_I14a']" value="0" onkeyup="formatarMoeda(this);">
+                            name="item[<?php echo $contador; ?>]['vUnTrib_I14a']"
+                            value="<?php echo $item->get_product()->get_price(); ?>" onkeyup="formatarMoeda(this);">
                         <label for="item[<?php echo $contador; ?>]['vUnTrib_I14a']">Valor tributo unitário</label>
                     </div>
                 </div>
@@ -185,8 +186,9 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text">%</span>
                     <div class="form-floating">
-                        <input type="text" value="0" class="form-control validate-form" maxlength="15" id="item[<?php echo $contador; ?>]['pPIS_Q08']"
-                            onkeypress="return apenasNumeros();" name="item[<?php echo $contador; ?>]['pPIS_Q08']">
+                        <input type="text" value="0" class="form-control validate-form" maxlength="15"
+                            id="item[<?php echo $contador; ?>]['pPIS_Q08']" onkeypress="return apenasNumeros();"
+                            name="item[<?php echo $contador; ?>]['pPIS_Q08']">
                         <label for="pPIS_Q08">Alíquota do PIS</label>
                     </div>
                 </div>
@@ -217,8 +219,9 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text">%</span>
                     <div class="form-floating">
-                        <input type="text" value="0" class="form-control validate-form" maxlength="15" id="item[<?php echo $contador; ?>]['pCOFINS_S08']"
-                            onkeypress="return apenasNumeros();" name="item[<?php echo $contador; ?>]['pCOFINS_S08']">
+                        <input type="text" value="0" class="form-control validate-form" maxlength="15"
+                            id="item[<?php echo $contador; ?>]['pCOFINS_S08']" onkeypress="return apenasNumeros();"
+                            name="item[<?php echo $contador; ?>]['pCOFINS_S08']">
                         <label for="pCOFINS_S08">Alíquota do COFINS</label>
                     </div>
                 </div>
