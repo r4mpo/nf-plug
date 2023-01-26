@@ -153,9 +153,7 @@ curl_setopt_array($curl, array(
 ));
 $response = curl_exec($curl);
 curl_close($curl);
-
 $dados = explode(',', $response);
-echo 'Chave NF-e: ' . $dados[1];
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -173,8 +171,10 @@ curl_setopt_array($curl, array(
     'Authorization: Basic ' . $autorizacao, 
   ),
 ));
-$response = curl_exec($curl);
+$url = curl_exec($curl);
 curl_close($curl);
 
-header("Location: $response");
+$nf_file = __DIR__ . '/../pdf/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.pdf';
+$nf = copy($url, $nf_file);
+header('Location: ' . $_SERVER['REQUEST_URI'] . '/../../pdf/' . basename($nf_file));
 ?>
