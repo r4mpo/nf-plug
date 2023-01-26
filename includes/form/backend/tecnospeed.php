@@ -1,5 +1,4 @@
 <?php
-
 /********** PEGANDO DADOS PARA INSERIR NOS CAMPOS DA API - tx2 ************/
 date_default_timezone_set('America/Sao_Paulo');
 $txt = fopen(__DIR__ . '/../tx2/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.txt', "a");
@@ -123,7 +122,7 @@ fwrite($txt, "\nCNPJ_ZD02=" . preg_replace('/\D/', '', $_POST["CNPJ_ZD02"]));
 fwrite($txt, "\nxContato_ZD04=" . $_POST["xContato_ZD04"]);
 fwrite($txt, "\nemail_ZD05=" . $_POST["email_ZD05"]);
 fwrite($txt, "\nfone_ZD06=" . $_POST["fone_ZD06"]);
-fwrite($txt, "\ninfCpl_Z03=" . $_POST["infCpl_Z03"]);
+fwrite($txt, "\ninfCpl_Z03=" . preg_replace("/(\\r)?\\n/i", "/", $_POST["infCpl_Z03"]));
 fwrite($txt, "\nSALVAR");
 $tx2 = file_get_contents(__DIR__ . '/../tx2/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.txt');
 

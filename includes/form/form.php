@@ -43,30 +43,42 @@ $configuracoes = get_option('nf_plug_dados');
     <!-- Arquivos CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Emitir NF-e</title>
+    <title>
+        <?php echo $id; ?> -
+        <?php echo $order->get_user()->display_name; ?>
+    </title>
 </head>
 
 <body>
 
+
     <div class="bloc-section">
         <h3>
             <i class="bi bi-info-square"></i>
-            Geração de NF-e
+            Geração da NFe - Pedido WooCommerce número
+            <?php echo $id; ?>
         </h3>
         <hr>
     </div>
 
     <form action="backend/tecnospeed.php" id="nfe_form" method="POST">
-        <?php
-        include_once('sections/introducao.php');
-        include_once('sections/emitente.php');
-        include_once('sections/adicionais.php');
-        include_once('sections/destinatario.php');
-        include_once('sections/mercadorias.php');
-        include_once('sections/consideracoes.php');
-        include_once('sections/configuracoes.php');
-        ?>
-        <div class="bloc-section">
+        <div id="campos-do-formulario">
+            <?php
+            include_once('sections/introducao.php');
+            include_once('sections/emitente.php');
+            include_once('sections/adicionais.php');
+            include_once('sections/destinatario.php');
+            include_once('sections/mercadorias.php');
+            include_once('sections/consideracoes.php');
+            include_once('sections/configuracoes.php');
+            ?>
+        </div>
+
+        <div id="progress_bar">
+            <!--  -->
+        </div>
+
+        <div class="bloc-section" id="bloco-de-botoes">
             <div class="container text-center">
                 <div class="row">
                     <div class="d-grid gap-2 d-md-block">
@@ -77,6 +89,7 @@ $configuracoes = get_option('nf_plug_dados');
             </div>
         </div>
     </form>
+
 </body>
 
 </html>
