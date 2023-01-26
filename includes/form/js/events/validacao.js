@@ -54,7 +54,7 @@ function validarFormulario() {
                 element.readOnly = true;
             });
 
-            document.getElementById('progress_bar').innerHTML += `<div class="bloc-section"><div class="container text-center" style="width: 50%;"><div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div></div></div></div>`
+            document.getElementById('progress_bar').innerHTML += `<div class="bloc-section"><div class="container text-center" style="width: 50%;"><div class="text-center"><div class="spinner-border" role="status"><span class="sr-only"></span></div></div></div></div>`
             document.getElementById('bloco-de-botoes').style.display = 'none';
             document.getElementById('campos-do-formulario').style.filter = 'blur(4px)';
             document.getElementById('nfe_form').submit();
