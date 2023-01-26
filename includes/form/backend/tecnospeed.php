@@ -136,7 +136,6 @@ $nome = $_POST['nome'];
 $autorizacao = base64_encode($nome . ':' . $senha);
 
 $curl = curl_init();
-
 curl_setopt_array($curl, array(
   CURLOPT_URL => 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/envia',
   CURLOPT_RETURNTRANSFER => true,
@@ -152,9 +151,30 @@ curl_setopt_array($curl, array(
     'Authorization: Basic ' . $autorizacao, 
   ),
 ));
-
 $response = curl_exec($curl);
-
 curl_close($curl);
-echo $response;
+
+$dados = explode(',', $response);
+echo 'Chave NF-e: ' . $dados[1];
+
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/imprime?grupo=$grupo&cnpj=$cnpj&ChaveNota=$dados[1]&Url=1",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_POSTFIELDS => "",
+  CURLOPT_HTTPHEADER => array(
+    'Content-Type: application/x-www-form-urlencoded',
+    'Authorization: Basic ' . $autorizacao, 
+  ),
+));
+$response = curl_exec($curl);
+curl_close($curl);
+
+header("Location: $response");
 ?>

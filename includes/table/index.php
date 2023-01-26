@@ -41,8 +41,7 @@ $orders = wc_get_orders(array('status' => 'completed'));
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($orders as $order):
-									// var_dump($order->data['date_created']);?>
+								<?php foreach ($orders as $order):?>
 									<tr>
 										<th scope="row">
 											<?php echo $order->get_id(); ?>
@@ -57,7 +56,7 @@ $orders = wc_get_orders(array('status' => 'completed'));
 											<?php echo $order->get_total(); ?>
 										</td>
 										<td>
-											<a href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>'><button
+											<a target="_blank" href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>'><button
 													type="button" class="btn btn-dark"><i class="fa fa-file-text"></i>
 												</button></a>
 										</td>
