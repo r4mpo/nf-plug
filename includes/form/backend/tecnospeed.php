@@ -3,7 +3,7 @@
 date_default_timezone_set('America/Sao_Paulo');
 $txt = fopen(__DIR__ . '/../tx2/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.txt', "a");
 
-fwrite($txt,"Formato=" . $_POST["Formato"]);
+fwrite($txt, "Formato=" . $_POST["Formato"]);
 fwrite($txt, "\nnumlote=" . $_POST["numlote"]);
 fwrite($txt, "\nINCLUIR");
 fwrite($txt, "\nId_A03=0"); // Este campo recebe o valor 0 pois se preenche automaticamente na API;
@@ -41,11 +41,11 @@ fwrite($txt, "\nfone_C16=" . $_POST["fone_C16"]);
 fwrite($txt, "\nIE_C17=" . $_POST["IE_C17"]);
 
 if (isset($_POST["CNPJ_E02"])) {
-    fwrite($txt, "\nCNPJ_E02=" . preg_replace('/\D/', '', $_POST["CNPJ_E02"]));
+  fwrite($txt, "\nCNPJ_E02=" . preg_replace('/\D/', '', $_POST["CNPJ_E02"]));
 }
 
 if (isset($_POST["CPF_E03"])) {
-    fwrite($txt, "\nCPF_E03=" . preg_replace('/\D/', '', $_POST["CPF_E03"]));
+  fwrite($txt, "\nCPF_E03=" . preg_replace('/\D/', '', $_POST["CPF_E03"]));
 }
 
 fwrite($txt, "\nIDESTRANGEIRO_E03A="); // colocar campo opcional no formulário
@@ -61,38 +61,38 @@ fwrite($txt, "\nCEP_E13=" . $_POST["CEP_E13"]);
 fwrite($txt, "\nINDIEDEST_E16A=" . $_POST["INDIEDEST_E16A"]);
 $item = $_POST['item'];
 for ($i = 1; $i <= count($item); $i++) {
-    fwrite($txt, "\nINCLUIRITEM");
-    fwrite($txt, "\nnItem_H02=" . $item[$i]["'nItem_H02'"]);
-    fwrite($txt, "\ncProd_I02=" . $_POST["cProd_I02"]);
-    fwrite($txt, "\ncEAN_I03=" . $item[$i]["'cEAN_I03'"]);
-    fwrite($txt, "\nxProd_I04=" . $item[$i]["'xProd_I04'"]);
-    fwrite($txt, "\nNCM_I05=" . $_POST["NCM_I05"]);
-    fwrite($txt, "\nCEST_I05c=" . $_POST["CEST_I05c"]);
-    fwrite($txt, "\nCFOP_I08=" . $_POST["cProd_I02"]);
-    fwrite($txt, "\nuCom_I09=" . $item[$i]["'uCom_I09'"]);
-    fwrite($txt, "\nqCom_I10=" . $item[$i]["'qCom_I10'"]);
-    fwrite($txt, "\nvUnCom_I10a=" . (preg_replace('/\D/', '', $item[$i]["'vUnCom_I10a'"])) / 100);
-    fwrite($txt, "\nvProd_I11=" . ((preg_replace('/\D/', '', $item[$i]["'vUnCom_I10a'"]) * $item[$i]["'qCom_I10'"]) / 100));
-    fwrite($txt, "\ncEANTrib_I12=" . $item[$i]["'cEAN_I03'"]);
-    fwrite($txt, "\nuTrib_I13=" . $_POST["uTrib_I13"]);
-    fwrite($txt, "\nqTrib_I14=" . $item[$i]["'qCom_I10'"]);
-    fwrite($txt, "\nvUnTrib_I14a=" . (preg_replace('/\D/', '', $item[$i]["'vUnTrib_I14a'"]) / 100));
-    fwrite($txt, "\nindTot_I17b=" . $_POST["indTot_I17b"]);
-    fwrite($txt, "\norig_N11=" . $item[$i]["'orig_N11'"]);
-    fwrite($txt, "\nCST_N12=" . $_POST["CST_N12"]);
-    fwrite($txt, "\nmodBC_N13=" . $_POST["modBC_N13"]);
-    fwrite($txt, "\nvBC_N15=" . (preg_replace('/\D/', '', $item[$i]["'vBC_N15'"])) / 100);
-    fwrite($txt, "\npICMS_N16=" . $_POST["pICMS_N16"]);
-    fwrite($txt, "\nvICMS_N17=" . (preg_replace('/\D/', '', $item[$i]["'vICMS_N17'"])) / 100);
-    fwrite($txt, "\nCST_Q06=" . $item[$i]["'CST_Q06'"]);
-    fwrite($txt, "\nvBC_Q07=" . (preg_replace('/\D/', '', $item[$i]["'vBC_Q07'"])) / 100);
-    fwrite($txt, "\npPIS_Q08=" . $item[$i]["'pPIS_Q08'"]);
-    fwrite($txt, "\nvPIS_Q09=" . (preg_replace('/\D/', '', $item[$i]["'vPIS_Q09'"])) / 100);
-    fwrite($txt, "\nCST_S06=" . $item[$i]["'CST_S06'"]);
-    fwrite($txt, "\nvBC_S07=" . (preg_replace('/\D/', '', $item[$i]["'vBC_S07'"])) / 100);
-    fwrite($txt, "\npCOFINS_S08=" . $item[$i]["'pCOFINS_S08'"]);
-    fwrite($txt, "\nvCOFINS_S11=" . (preg_replace('/\D/', '', $item[$i]["'vCOFINS_S11'"])) / 100);
-    fwrite($txt, "\nSALVARITEM");
+  fwrite($txt, "\nINCLUIRITEM");
+  fwrite($txt, "\nnItem_H02=" . $item[$i]["'nItem_H02'"]);
+  fwrite($txt, "\ncProd_I02=" . $_POST["cProd_I02"]);
+  fwrite($txt, "\ncEAN_I03=" . $item[$i]["'cEAN_I03'"]);
+  fwrite($txt, "\nxProd_I04=" . $item[$i]["'xProd_I04'"]);
+  fwrite($txt, "\nNCM_I05=" . $_POST["NCM_I05"]);
+  fwrite($txt, "\nCEST_I05c=" . $_POST["CEST_I05c"]);
+  fwrite($txt, "\nCFOP_I08=" . $_POST["cProd_I02"]);
+  fwrite($txt, "\nuCom_I09=" . $item[$i]["'uCom_I09'"]);
+  fwrite($txt, "\nqCom_I10=" . $item[$i]["'qCom_I10'"]);
+  fwrite($txt, "\nvUnCom_I10a=" . (preg_replace('/\D/', '', $item[$i]["'vUnCom_I10a'"])) / 100);
+  fwrite($txt, "\nvProd_I11=" . ((preg_replace('/\D/', '', $item[$i]["'vUnCom_I10a'"]) * $item[$i]["'qCom_I10'"]) / 100));
+  fwrite($txt, "\ncEANTrib_I12=" . $item[$i]["'cEAN_I03'"]);
+  fwrite($txt, "\nuTrib_I13=" . $_POST["uTrib_I13"]);
+  fwrite($txt, "\nqTrib_I14=" . $item[$i]["'qCom_I10'"]);
+  fwrite($txt, "\nvUnTrib_I14a=" . (preg_replace('/\D/', '', $item[$i]["'vUnTrib_I14a'"]) / 100));
+  fwrite($txt, "\nindTot_I17b=" . $_POST["indTot_I17b"]);
+  fwrite($txt, "\norig_N11=" . $item[$i]["'orig_N11'"]);
+  fwrite($txt, "\nCST_N12=" . $_POST["CST_N12"]);
+  fwrite($txt, "\nmodBC_N13=" . $_POST["modBC_N13"]);
+  fwrite($txt, "\nvBC_N15=" . (preg_replace('/\D/', '', $item[$i]["'vBC_N15'"])) / 100);
+  fwrite($txt, "\npICMS_N16=" . $_POST["pICMS_N16"]);
+  fwrite($txt, "\nvICMS_N17=" . (preg_replace('/\D/', '', $item[$i]["'vICMS_N17'"])) / 100);
+  fwrite($txt, "\nCST_Q06=" . $item[$i]["'CST_Q06'"]);
+  fwrite($txt, "\nvBC_Q07=" . (preg_replace('/\D/', '', $item[$i]["'vBC_Q07'"])) / 100);
+  fwrite($txt, "\npPIS_Q08=" . $item[$i]["'pPIS_Q08'"]);
+  fwrite($txt, "\nvPIS_Q09=" . (preg_replace('/\D/', '', $item[$i]["'vPIS_Q09'"])) / 100);
+  fwrite($txt, "\nCST_S06=" . $item[$i]["'CST_S06'"]);
+  fwrite($txt, "\nvBC_S07=" . (preg_replace('/\D/', '', $item[$i]["'vBC_S07'"])) / 100);
+  fwrite($txt, "\npCOFINS_S08=" . $item[$i]["'pCOFINS_S08'"]);
+  fwrite($txt, "\nvCOFINS_S11=" . (preg_replace('/\D/', '', $item[$i]["'vCOFINS_S11'"])) / 100);
+  fwrite($txt, "\nSALVARITEM");
 }
 fwrite($txt, "\nvBC_W03=" . preg_replace('/\D/', '', $_POST["vBC_W03"]) / 100);
 fwrite($txt, "\nvICMS_W04=" . preg_replace('/\D/', '', $_POST["vICMS_W04"]) / 100);
@@ -134,8 +134,8 @@ $senha = $_POST['senha'];
 $nome = $_POST['nome'];
 $autorizacao = base64_encode($nome . ':' . $senha);
 
-$curl = curl_init();
-curl_setopt_array($curl, array(
+$emitir = curl_init();
+curl_setopt_array($emitir, array(
   CURLOPT_URL => 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/envia',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
@@ -147,15 +147,16 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS => "grupo=$grupo&cnpj=$cnpj&arquivo=$tx2",
   CURLOPT_HTTPHEADER => array(
     'Content-Type: application/x-www-form-urlencoded',
-    'Authorization: Basic ' . $autorizacao, 
+    'Authorization: Basic ' . $autorizacao,
   ),
-));
-$response = curl_exec($curl);
-curl_close($curl);
+)
+);
+$response = curl_exec($emitir);
+curl_close($emitir);
 $dados = explode(',', $response);
 
-$curl = curl_init();
-curl_setopt_array($curl, array(
+$imprimir = curl_init();
+curl_setopt_array($imprimir, array(
   CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/imprime?grupo=$grupo&cnpj=$cnpj&ChaveNota=$dados[1]&Url=1",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
@@ -167,13 +168,42 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS => "",
   CURLOPT_HTTPHEADER => array(
     'Content-Type: application/x-www-form-urlencoded',
-    'Authorization: Basic ' . $autorizacao, 
+    'Authorization: Basic ' . $autorizacao,
   ),
-));
-$url = curl_exec($curl);
-curl_close($curl);
+)
+);
+$url = curl_exec($imprimir);
+curl_close($imprimir);
 
 $nf_file = __DIR__ . '/../pdf/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.pdf';
 $nf = copy($url, $nf_file);
-header('Location: ' . $_SERVER['REQUEST_URI'] . '/../../pdf/' . basename($nf_file));
+
+if (isset($_POST['emailCliente'])) {
+
+  $emailDestinatario = $_POST['emailCliente'];
+  $emailAdmin = $_POST['email_adm'];
+
+  $enviarPorEmail = curl_init();
+  curl_setopt_array($enviarPorEmail, array(
+    CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/email",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => "Grupo=$grupo&CNPJ=$cnpj&EmailDestinatario=$emailDestinatario&ChaveNota=$dados[1]&Assunto=Nota Fiscal: $dados[1]&Texto=Olá, tudo bem?\nSegue anexo sua cópia da documentação fiscal.&AnexaPDF=1&ConteudoHTML=0&EmailCCo=$emailAdmin&EmailCC=$emailAdmin",
+    CURLOPT_HTTPHEADER => array(
+      'Content-Type: application/x-www-form-urlencoded',
+      'Authorization: Basic ' . $autorizacao,
+    ),
+  )
+  );
+  $emailEnviado = curl_exec($enviarPorEmail);
+  curl_close($enviarPorEmail);
+}
+
+echo $emailEnviado;
+// header('Location: ' . $_SERVER['REQUEST_URI'] . '/../../pdf/' . basename($nf_file));
 ?>

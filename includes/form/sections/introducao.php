@@ -18,7 +18,7 @@
                 <div class="form-floating">
                     <input type="text" onkeypress="return apenasNumeros();" value="<?php echo $id; ?>"
                         class="form-control validate-form" id="numlot" name="numlot">
-                    <label for="numlot">Nº Lote</label>
+                    <label for="numlot">No.Lote</label>
                 </div>
             </div>
 

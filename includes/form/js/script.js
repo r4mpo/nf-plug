@@ -42,3 +42,15 @@ function somarOutrasDespesasNoValorTotalNfe() {
     document.getElementById('vNF_W16').value = 'R$ ' + valorTotalNfe;
 
 }
+
+function enviarEmail(id_checkbox, id_input) {
+
+    let checkbox = document.getElementById(id_checkbox);
+    let input = document.getElementById(id_input);
+
+    if (checkbox.checked) {
+        input.disabled = false;
+    } else {
+        input.disabled = true;
+    }
+}

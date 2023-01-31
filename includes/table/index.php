@@ -2,79 +2,74 @@
 require_once __DIR__ . '/../../../../../wp-admin/admin.php';
 $orders = wc_get_orders(array('status' => 'completed'));
 ?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Pedidos</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
 
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<link rel="stylesheet" href="css/style.css">
-
+    <title>NF-e PLUG</title>
 </head>
 
-<body>
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Painel NF-e / Pedidos finalizados.</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-wrap">
-						<table class="table text-center">
-							<thead class="thead-dark">
-								<tr>
-									<th>#</th>
-									<th>Cliente</th>
-									<th>Data do pedido</th>
-									<th>Total</th>
-									<th>NF-e</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php foreach ($orders as $order):?>
-									<tr>
-										<th scope="row">
-											<?php echo $order->get_id(); ?>
-										</th>
-										<td>
-											<?php echo $order->get_user()->display_name; ?>
-										</td>
-										<td>
-											<?php echo wc_format_datetime($order->get_date_created(), 'd/m/Y') . ' às ' . wc_format_datetime($order->get_date_created(), 'h:i:s'); ?>
-										</td>
-										<td class="money">R$
-											<?php echo $order->get_total(); ?>
-										</td>
-										<td>
-											<a target="_blank" href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>'><button
-													type="button" class="btn btn-dark"><i class="fa fa-file-text"></i>
-												</button></a>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<body class="container">
+    <table id="maintable" class="display compact cell-border" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Cliente</th>
+                <th>Data do pedido</th>
+                <th>Total</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($orders as $order): ?>
+                <tr>
+                    <th scope="row">
+                        <?php echo $order->get_id(); ?>
+                    </th>
+                    <td>
+                        <?php echo $order->get_user()->display_name; ?>
+                    </td>
+                    <td>
+                        <?php echo wc_format_datetime($order->get_date_created(), 'd/m/Y') . ' às ' . wc_format_datetime($order->get_date_created(), 'h:i:s'); ?>
+                    </td>
+                    <td class="money">R$
+                        <?php echo $order->get_total(); ?>
+                    </td>
+                    <td><a target="_blank" href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>'>Em desenvolvimento</a></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tfoot style="background-color: #c0c0c0; color: #ffffff; font-size: 0.9em; ">
+            <tr>
+                <th>Código</th>
+                <th>Cliente</th>
+                <th>Data do pedido</th>
+                <th>Total</th>
+                <th>Situação</th>
+            </tr>
+        </tfoot>
+    </table>
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/popper.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-
+    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="js/jszip.min.js"></script>
+    <script type="text/javascript" src="js/pdfmake.min.js"></script>
+    <script type="text/javascript" src="js/vfs_fonts.js"></script>
+    <script type="text/javascript" src="js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/jquery.mark.min.js"></script>
+    <script type="text/javascript" src="js/datatables.mark.js"></script>
+    <script type="text/javascript" src="js/buttons.colVis.min.js"></script>
 </body>
 
 </html>

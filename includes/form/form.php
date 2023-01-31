@@ -33,6 +33,10 @@ $configuracoes = get_option('nf_plug_dados');
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+
     <!-- Arquivos JavaScript -->
     <script src="js/script.js"></script>
     <script src="js/masks/cpf.js"></script>

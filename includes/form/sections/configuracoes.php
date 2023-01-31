@@ -35,3 +35,4 @@
 <input type="hidden" class="validate-config" name="pICMS_N16" value="<?php echo $configuracoes['base_calculo_icms']; ?>">
 <!-- <input type="hidden" class="validate-config" name="vBCST_N21" value="<?php echo $configuracoes['base_calculo_icms_st']; ?>"> -->
 <input type="hidden" class="validate-config" name="modBC_N13" value="<?php echo $configuracoes['mod_bc_icms']; ?>">
+<input type="hidden" class="validate-config" name="email_adm" value="<?php echo get_user_meta($adm->ID, 'billing_email', true); ?>">
