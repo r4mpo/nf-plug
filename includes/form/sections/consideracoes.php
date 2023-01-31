@@ -214,13 +214,6 @@
         <div class="input-group">
             <span class="input-group-text">Descrição</span>
             <textarea class="form-control" id="infCpl_Z03" name="infCpl_Z03" aria-label="With textarea"><?php echo $configuracoes['descricao_padrao']; ?></textarea>
-        </div><br>
-
-        <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" id="emailCheck" type="checkbox" onclick="enviarEmail(this.id, 'emailCliente')" checked>
-            </div>
-            <input type="text" id="emailCliente" name="emailCliente" value="<?php echo $order->get_billing_email(); ?>" placeholder="Enviar PDF da NF-e por e-mail" class="form-control validate-form">
         </div>
     </div>
 </div>

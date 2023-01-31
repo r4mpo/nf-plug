@@ -215,6 +215,30 @@ if (!class_exists('nf_plug_admin')) {
 
             add_settings_section(
                 'setting_section_id_5',
+                'Envio de e-mails',
+                null,
+                'nf_plug_dados_admin'
+            );
+
+            add_settings_field(
+                'assunto',
+                'Assunto',
+                array($this, 'assunto_callback'),
+                'nf_plug_dados_admin',
+                'setting_section_id_5',
+            );
+
+            add_settings_field(
+                'texto',
+                'Texto',
+                array($this, 'texto_callback'),
+                'nf_plug_dados_admin',
+                'setting_section_id_5',
+            );
+
+
+            add_settings_section(
+                'setting_section_id_6',
                 'Padronize campos do formulário',
                 null,
                 'nf_plug_dados_admin'
@@ -225,7 +249,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Nº Série Fiscal',
                 array($this, 'serie_B07_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_5',
+                'setting_section_id_6',
             );
 
             add_settings_field(
@@ -233,7 +257,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Descrição',
                 array($this, 'descricao_padrao_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_5',
+                'setting_section_id_6',
             );
 
             add_settings_field(
@@ -241,7 +265,7 @@ if (!class_exists('nf_plug_admin')) {
                 'ID do Local de Destino',
                 array($this, 'id_local_de_destino_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_5',
+                'setting_section_id_6',
             );
 
             add_settings_field(
@@ -249,7 +273,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Modalidade de frete',
                 array($this, 'modalidade_frete_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_5',
+                'setting_section_id_6',
             );
 
             add_settings_field(
@@ -257,7 +281,15 @@ if (!class_exists('nf_plug_admin')) {
                 'Método de pagamento',
                 array($this, 'metodo_pagamento_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_5',
+                'setting_section_id_6',
+            );
+
+            add_settings_field(
+                'indi_ie_dest',
+                'Indicador IE do Destinatário',
+                array($this, 'indi_ie_dest_callback'),
+                'nf_plug_dados_admin',
+                'setting_section_id_6',
             );
 
             add_settings_field(
@@ -265,7 +297,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Base de cálculo ICMS (%)',
                 array($this, 'base_calculo_icms_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_5',
+                'setting_section_id_6',
             );
 
             add_settings_field(
@@ -273,7 +305,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Base de cálculo ICMS ST (%)',
                 array($this, 'base_calculo_icms_st_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_5',
+                'setting_section_id_6',
             );
 
             add_settings_field(
@@ -281,7 +313,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Método de pagamento',
                 array($this, 'metodo_pagamento_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_5',
+                'setting_section_id_6',
             );
 
             add_settings_section(
@@ -565,6 +597,23 @@ if (!class_exists('nf_plug_admin')) {
         <?php
         }
 
+        public function assunto_callback()
+        {
+            $value = isset($this->options['assunto']) ? esc_attr($this->options['assunto']) : '';
+            ?>
+            <input type="text" id="assunto" name="nf_plug_dados[assunto]" value="<?php echo $value; ?>">
+        <?php
+        }
+
+        public function texto_callback()
+        {
+            $value = isset($this->options['texto']) ? esc_attr($this->options['texto']) : '';
+            ?>
+            <input type="text" id="texto" name="nf_plug_dados[texto]" value="<?php echo $value; ?>">
+        <?php
+        }
+
+
         public function descricao_padrao_callback()
         {
             $value = isset($this->options['descricao_padrao']) ? esc_attr($this->options['descricao_padrao']) : '';
@@ -632,6 +681,24 @@ if (!class_exists('nf_plug_admin')) {
             </select>
         <?php
         }
+
+        public function indi_ie_dest_callback()
+        {
+            $value = isset($this->options['indi_ie_dest']) ? esc_attr($this->options['indi_ie_dest']) : '';
+            ?>
+            <select id="indi_ie_dest" name="nf_plug_dados[indi_ie_dest]">
+                <option selected value="">Selecione a indicação IE do Destinatário</option>
+                <option <?php if ($value == "1"): ?> selected <?php endif; ?> value="1">Contribuinte ICMS
+                </option>
+                <option <?php if ($value == "2"): ?> selected <?php endif; ?> value="2">Contribuinte isento de Inscrição no cadastro
+                    de Contribuintes do ICMS
+                </option>
+                <option <?php if ($value == "9"): ?> selected <?php endif; ?> value="9">Não Contribuinte, que pode ou não possuir
+                    Inscrição Estadual no Cadastro de Contribuintes do ICMS</option>
+            </select>
+        <?php
+        }
+
 
         public function Formato_callback()
         {
@@ -886,6 +953,12 @@ if (!class_exists('nf_plug_admin')) {
             if (isset($input['serie_B07']))
                 $new_input['serie_B07'] = sanitize_text_field($input['serie_B07']);
 
+            if (isset($input['assunto']))
+                $new_input['assunto'] = sanitize_text_field($input['assunto']);
+
+            if (isset($input['texto']))
+                $new_input['texto'] = sanitize_text_field($input['texto']);
+
             if (isset($input['id_local_de_destino']))
                 $new_input['id_local_de_destino'] = sanitize_text_field($input['id_local_de_destino']);
 
@@ -894,6 +967,9 @@ if (!class_exists('nf_plug_admin')) {
 
             if (isset($input['metodo_pagamento']))
                 $new_input['metodo_pagamento'] = sanitize_text_field($input['metodo_pagamento']);
+
+            if (isset($input['indi_ie_dest']))
+                $new_input['indi_ie_dest'] = sanitize_text_field($input['indi_ie_dest']);
 
             if (isset($input['nNF_B08']))
                 $new_input['nNF_B08'] = sanitize_text_field($input['nNF_B08']);

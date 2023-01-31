@@ -18,9 +18,12 @@
         <div class="col-md">
             <div class="form-floating">
                 <select class="form-select validate-form" onchange="habilitandoInscricaoEstadual(this, 'IE_E17')" id="INDIEDEST_E16A" name="INDIEDEST_E16A">
-                    <option value="1">Contribuinte ICMS</option>
-                    <option value="2">Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS</option>
-                    <option value="9">Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS</option>
+                    <option <?php if ($configuracoes['indi_ie_dest']=="1" ): ?> selected
+                        <?php endif; ?> value="1">Contribuinte ICMS</option>
+                    <option <?php if ($configuracoes['indi_ie_dest']=="2" ): ?> selected
+                        <?php endif; ?> value="2">Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS</option>
+                    <option <?php if ($configuracoes['indi_ie_dest']=="9" ): ?> selected
+                        <?php endif; ?> value="9">Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS</option>
                 </select>
                 <label for="INDIEDEST_E16A">Indicador da IE do Destinatário</label>
             </div>

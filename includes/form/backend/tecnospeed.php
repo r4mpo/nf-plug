@@ -127,6 +127,7 @@ fwrite($txt, "\nSALVAR");
 $tx2 = file_get_contents(__DIR__ . '/../tx2/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.txt');
 
 /********** REQUISIÇÃO NA API - TECNOSPEED ************/
+# Dados para os headers/body
 
 $cnpj = $_POST['cnpj'];
 $grupo = $_POST['grupo'];
@@ -134,58 +135,14 @@ $senha = $_POST['senha'];
 $nome = $_POST['nome'];
 $autorizacao = base64_encode($nome . ':' . $senha);
 
-$emitir = curl_init();
-curl_setopt_array($emitir, array(
-  CURLOPT_URL => 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/envia',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS => "grupo=$grupo&cnpj=$cnpj&arquivo=$tx2",
-  CURLOPT_HTTPHEADER => array(
-    'Content-Type: application/x-www-form-urlencoded',
-    'Authorization: Basic ' . $autorizacao,
-  ),
-)
-);
-$response = curl_exec($emitir);
-curl_close($emitir);
-$dados = explode(',', $response);
+$curl = curl_init();
 
-$imprimir = curl_init();
-curl_setopt_array($imprimir, array(
-  CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/imprime?grupo=$grupo&cnpj=$cnpj&ChaveNota=$dados[1]&Url=1",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'GET',
-  CURLOPT_POSTFIELDS => "",
-  CURLOPT_HTTPHEADER => array(
-    'Content-Type: application/x-www-form-urlencoded',
-    'Authorization: Basic ' . $autorizacao,
-  ),
-)
-);
-$url = curl_exec($imprimir);
-curl_close($imprimir);
-
-$nf_file = __DIR__ . '/../pdf/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.pdf';
-$nf = copy($url, $nf_file);
-
-if (isset($_POST['emailCliente'])) {
-
-  $emailDestinatario = $_POST['emailCliente'];
-  $emailAdmin = $_POST['email_adm'];
-
-  $enviarPorEmail = curl_init();
-  curl_setopt_array($enviarPorEmail, array(
-    CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/email",
+/****************************************************/
+# cURL - emissão da nota fiscal
+curl_setopt_array(
+  $curl,
+  array(
+    CURLOPT_URL => 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/envia',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -193,17 +150,76 @@ if (isset($_POST['emailCliente'])) {
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => "Grupo=$grupo&CNPJ=$cnpj&EmailDestinatario=$emailDestinatario&ChaveNota=$dados[1]&Assunto=Nota Fiscal: $dados[1]&Texto=Olá, tudo bem?\nSegue anexo sua cópia da documentação fiscal.&AnexaPDF=1&ConteudoHTML=0&EmailCCo=$emailAdmin&EmailCC=$emailAdmin",
+    CURLOPT_POSTFIELDS => "grupo=$grupo&cnpj=$cnpj&arquivo=$tx2",
     CURLOPT_HTTPHEADER => array(
       'Content-Type: application/x-www-form-urlencoded',
       'Authorization: Basic ' . $autorizacao,
     ),
   )
-  );
-  $emailEnviado = curl_exec($enviarPorEmail);
-  curl_close($enviarPorEmail);
+);
+
+$response = curl_exec($curl);
+$dados = explode(',', $response);
+
+/****************************************************/
+# cURL - imprimindo .pdf
+curl_setopt_array(
+  $curl,
+  array(
+    CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/imprime?grupo=$grupo&cnpj=$cnpj&ChaveNota=$dados[1]&Url=1",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_POSTFIELDS => "",
+    CURLOPT_HTTPHEADER => array(
+      'Content-Type: application/x-www-form-urlencoded',
+      'Authorization: Basic ' . $autorizacao,
+    ),
+  )
+);
+$url = curl_exec($curl);
+$nomeArquivo = __DIR__ . '/../pdf/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.pdf';
+$nf = copy($url, $nomeArquivo);
+
+/****************************************************/
+# cURL - enviando e-mail com NF-e para destinatários
+if (isset($_POST['emailCliente'])) {
+
+  $emailDestinatario = $_POST['emailCliente'];
+  $emailAdmin = $_POST['email_adm'];
+  $destinatarios = explode(',', (str_replace(' ', '', $_POST['emailCliente'])));
+  $assunto = $_POST['assunto'];
+  $texto = $_POST['texto'];
+
+  for ($i = 0; $i < count($destinatarios); $i++) {
+    curl_setopt_array(
+      $curl,
+      array(
+        CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/email",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => "Grupo=$grupo&CNPJ=$cnpj&EmailDestinatario=$destinatarios[$i]&ChaveNota=$dados[1]&Assunto=$assunto&Texto=$texto&AnexaPDF=1&ConteudoHTML=0&EmailCCo=$emailAdmin&EmailCC=$emailAdmin",
+        CURLOPT_HTTPHEADER => array(
+          'Content-Type: application/x-www-form-urlencoded',
+          'Authorization: Basic ' . $autorizacao,
+        ),
+      )
+    );
+    $emailEnviado = curl_exec($curl);
+  }
 }
 
-echo $emailEnviado;
-// header('Location: ' . $_SERVER['REQUEST_URI'] . '/../../pdf/' . basename($nf_file));
+curl_close($curl); // fechando o cURL
+
+# Redirecionando o usuário para o pdf salvo da NF-e
+header('Location: ' . $_SERVER['REQUEST_URI'] . '/../../pdf/' . basename($nomeArquivo));
 ?>
