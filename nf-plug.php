@@ -53,5 +53,7 @@ if (is_admin())
         nf_plug_PLUGIN_SLUG,
         nf_plug_VERSION
         );
+
+        // $nf_plug_admin->maybe_add_column('wp_wc_order_stats', 'nfe_keys', "ALTER TABLE wp_wc_order_stats ADD nfe_keys varchar(255) null");
     }, 5 );
 ?>
