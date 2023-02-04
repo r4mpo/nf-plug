@@ -17,13 +17,13 @@ if (!function_exists('nf_plug_uninstall')) {
         $nf_plug_admin->possivelmente_dropar_coluna(
             'wp_wc_order_stats',
             'chave_nota_fiscal_plug',
-            'ALTER TABLE wp_wc_order_stats DROP COLUMN chave_nota_fiscal_plug'
+            "ALTER TABLE 'wp_wc_order_stats' DROP COLUMN 'chave_nota_fiscal_plug'"
         );
 
         $nf_plug_admin->possivelmente_dropar_coluna(
             'wp_wc_order_stats',
             'situacao_nota_fiscal_plug',
-            'ALTER TABLE wp_wc_order_stats DROP COLUMN situacao_nota_fiscal_plug',
+            "ALTER TABLE 'wp_wc_order_stats' DROP COLUMN 'situacao_nota_fiscal_plug'",
         );
     }
 
