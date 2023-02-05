@@ -21,8 +21,8 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text"><i class="bi bi-coin"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control validate-form formatar-moeda"
-                            id="item[<?php echo $contador; ?>]['vUnTrib_I14a']"
+                        <input type="text" class="form-control bg-color-cinza validate-form formatar-moeda"
+                            id="item[<?php echo $contador; ?>]['vUnTrib_I14a']" readonly
                             name="item[<?php echo $contador; ?>]['vUnTrib_I14a']"
                             value="<?php echo $item->get_product()->get_price(); ?>" onkeyup="formatarMoeda(this);">
                         <label for="item[<?php echo $contador; ?>]['vUnTrib_I14a']">Valor tributo unitário</label>
@@ -40,8 +40,8 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text"><i class="bi bi-coin"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control validate-form formatar-moeda"
-                            id=" item[<?php echo $contador; ?>]['vUnCom_I10a']"
+                        <input type="text" class="form-control bg-color-cinza validate-form formatar-moeda"
+                            id=" item[<?php echo $contador; ?>]['vUnCom_I10a']" readonly
                             name="item[<?php echo $contador; ?>]['vUnCom_I10a']" onkeyup="formatarMoeda(this);"
                             value="<?php echo $item->get_product()->get_price(); ?>">
                         <label for="item[<?php echo $contador; ?>]['vUnCom_I10a']">Valor Un. Produto</label>
@@ -136,9 +136,9 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text"><i class="bi bi-clipboard-data"></i></span>
                     <div class="form-floating">
-                        <input type="text" class="form-control validate-form"
+                        <input type="text" class="form-control bg-color-cinza validate-form"
                             id="item[<?php echo $contador; ?>]['qCom_I10']"
-                            name="item[<?php echo $contador; ?>]['qCom_I10']" onkeypress="return apenasNumeros();"
+                            name="item[<?php echo $contador; ?>]['qCom_I10']" readonly onkeypress="return apenasNumeros();"
                             value="<?php echo $item->get_quantity(); ?>">
                         <label for="item[<?php echo $contador; ?>]['qCom_I10']">Qtd. Produto</label>
                     </div>

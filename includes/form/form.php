@@ -60,7 +60,7 @@ $configuracoes = get_option('nf_plug_dados');
         <h3>
             <i class="bi bi-info-square"></i>
             Geração da NFe - Pedido WooCommerce número
-            <?php echo $id; ?>
+            #<?php echo $id; ?>
         </h3>
         <hr>
     </div>
