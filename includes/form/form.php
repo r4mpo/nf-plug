@@ -65,7 +65,7 @@ $configuracoes = get_option('nf_plug_dados');
         <hr>
     </div>
 
-    <form action="backend/tecnospeed.php" id="nfe_form" method="POST">
+    <form action="backend/emitir-nfe.php" id="nfe_form" method="POST">
         <div id="campos-do-formulario">
             <?php
             include_once('sections/introducao.php');
@@ -75,7 +75,7 @@ $configuracoes = get_option('nf_plug_dados');
             include_once('sections/mercadorias.php');
             include_once('sections/consideracoes.php');
             include_once('sections/configuracoes.php');
-            include_once('sections/enviarEmail.php');
+            // include_once('sections/enviarEmail.php');
             ?>
         </div>
 
