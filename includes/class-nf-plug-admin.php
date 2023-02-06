@@ -338,7 +338,7 @@ if (!class_exists('nf_plug_admin')) {
             );
 
             add_settings_section(
-                'setting_section_id_6',
+                'setting_section_id_7',
                 'Pré-definições',
                 null,
                 'nf_plug_dados_admin'
@@ -349,7 +349,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Formato',
                 array($this, 'Formato_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -357,7 +357,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Modalidade de determinação da BC do ICMS',
                 array($this, 'mod_bc_icms_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -365,7 +365,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Nº Lote',
                 array($this, 'numlote_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -373,7 +373,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Versão NF-e',
                 array($this, 'versao_A02_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -381,7 +381,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Formato do danfe',
                 array($this, 'tpImp_B21_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -389,7 +389,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Tipo de Emissão da NF-e',
                 array($this, 'tpEmis_B22_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -397,7 +397,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Dígito Verificador da Chave de Acesso da NF-e',
                 array($this, 'cDV_B23_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -405,7 +405,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Dígito Verificador da Chave de Acesso da NF-e',
                 array($this, 'cDV_B23_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -413,7 +413,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Tipo ambiente',
                 array($this, 'tpAmb_B24_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -421,7 +421,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Indica operação com Consumidor final',
                 array($this, 'INDFINAL_B25A_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -429,7 +429,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Dígito Verificador da NF-e',
                 array($this, 'cDV_B23_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -437,7 +437,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Aplicação',
                 array($this, 'verProc_B27_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -445,7 +445,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Unidade de medida tributável',
                 array($this, 'uTrib_I13_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -453,7 +453,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Indica se valor do item entra no valor total da NF-e',
                 array($this, 'indTot_I17b_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -461,7 +461,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Tributação do ICMS',
                 array($this, 'CST_N12_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -469,7 +469,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Valor total fundo de combate à pobreza retido por substituição tributária',
                 array($this, 'vFCPST_W06a_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -477,7 +477,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Valor total fundo de combate à pobreza retido anteriormente por Substituição Tributária',
                 array($this, 'vFCPSTRet_W06b_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -485,7 +485,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Código NCM com 8 digitos',
                 array($this, 'NCM_I05_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
 
             add_settings_field(
@@ -493,7 +493,7 @@ if (!class_exists('nf_plug_admin')) {
                 'Número do documento fiscal',
                 array($this, 'nNF_B08_callback'),
                 'nf_plug_dados_admin',
-                'setting_section_id_6',
+                'setting_section_id_7',
             );
         }
 

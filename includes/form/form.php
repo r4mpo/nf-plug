@@ -75,7 +75,7 @@ $configuracoes = get_option('nf_plug_dados');
             include_once('sections/mercadorias.php');
             include_once('sections/consideracoes.php');
             include_once('sections/configuracoes.php');
-            // include_once('sections/enviarEmail.php');
+            include_once('sections/enviarEmail.php');
             ?>
         </div>
 

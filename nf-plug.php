@@ -54,6 +54,18 @@ if (is_admin())
 
         $nf_plug_admin->possivelmente_adicionar_coluna(
             'wp_wc_order_stats',
+            'pdf_nota_fiscal_plug',
+            'ALTER TABLE wp_wc_order_stats ADD pdf_nota_fiscal_plug varchar(255) null'
+        );
+
+        $nf_plug_admin->possivelmente_adicionar_coluna(
+            'wp_wc_order_stats',
+            'xml_nota_fiscal_plug',
+            'ALTER TABLE wp_wc_order_stats ADD xml_nota_fiscal_plug varchar(255) null'
+        );
+
+        $nf_plug_admin->possivelmente_adicionar_coluna(
+            'wp_wc_order_stats',
             'situacao_nota_fiscal_plug',
             'ALTER TABLE wp_wc_order_stats ADD situacao_nota_fiscal_plug varchar(255) NOT NULL DEFAULT ("Pendente")',
         );
@@ -73,6 +85,18 @@ if (is_admin())
                 'wp_wc_order_stats',
                 'chave_nota_fiscal_plug',
                 "ALTER TABLE wp_wc_order_stats DROP COLUMN chave_nota_fiscal_plug"
+            );
+
+            $nf_plug_admin->possivelmente_dropar_coluna(
+                'wp_wc_order_stats',
+                'pdf_nota_fiscal_plug',
+                "ALTER TABLE wp_wc_order_stats DROP COLUMN pdf_nota_fiscal_plug"
+            );
+
+            $nf_plug_admin->possivelmente_dropar_coluna(
+                'wp_wc_order_stats',
+                'xml_nota_fiscal_plug',
+                "ALTER TABLE wp_wc_order_stats DROP COLUMN xml_nota_fiscal_plug"
             );
 
             $nf_plug_admin->possivelmente_dropar_coluna(

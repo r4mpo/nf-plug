@@ -35,7 +35,7 @@
                 <span class="input-group-text"><i class="bi bi-pencil"></i></span>
                 <div class="form-floating">
                     <input type="text"
-                        value="Realização de venda de mercadorias solicitadas por <?php echo $order->get_user()->display_name; ?>"
+                        value="Venda"
                         class="form-control validate-form" id="natOp_B04" name="natOp_B04">
                     <label for="natOp_B04">Descrição da operação</label>
                 </div>

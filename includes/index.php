@@ -68,19 +68,18 @@ $nf_plug_admin = new nf_plug_admin(nf_plug_BASE_NAME, nf_plug_PLUGIN_SLUG, nf_pl
                         </td>
                         <td>
                             <?php if ($nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'situacao_nota_fiscal_plug') == 'Pendente') { ?>
-                                <a href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>'
-                                    target="_blank"><button type="button" title="Emitir" class="btn btn-outline-primary"><i
-                                            class="bi bi-file-earmark-text"></i></button>
+                                <a href='../form/form.php?id=<?php echo base64_encode($order->get_id()) ?>' target="_blank"
+                                    rel="noopener noreferrer"><button type="button" title="Emitir"
+                                        class="btn btn-outline-primary"><i class="bi bi-file-earmark-text"></i></button>
                                 </a>
                             <?php } elseif ($nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'situacao_nota_fiscal_plug') == 'Cancelado') { ?>
                                 <i style="color: red;" title="Cancelado" class="bi bi-x-circle-fill"></i>
 
                             <?php } else { ?>
                                 <!-- <button type="button" title="Cancelar" class="btn btn-outline-danger"><i
-                                                class="bi bi-x-circle-fill"></i></button> -->
-                                <a href="../form/pdf/<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'pdf_nota_fiscal_plug'); ?>" target="_blank" rel="noopener noreferrer"><button type="button"
-                                        title="Baixar PDF" class="btn btn-outline-danger"><i
-                                            class="bi bi-filetype-pdf"></i></button></a>
+                                                        class="bi bi-x-circle-fill"></i></button> -->
+                                <button type="button" title="Baixar PDF" class="btn btn-outline-secondary"><i
+                                        class="bi bi-filetype-pdf"></i></button>
                                 <button type="button" title="Baixar XML" class="btn btn-outline-success"><i
                                         class="bi bi-filetype-xml"></i></button>
                                 <button type="button" title="Enviar NF-e por e-mail" class="btn btn-outline-dark"><i

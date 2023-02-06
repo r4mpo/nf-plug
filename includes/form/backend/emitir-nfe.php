@@ -131,9 +131,9 @@ $senha = $_POST['senha'];
 $nome = $_POST['nome'];
 $autorizacao = base64_encode($nome . ':' . $senha);
 
-$curl = curl_init();
+$curl_emissao = curl_init();
 curl_setopt_array(
-  $curl,
+  $curl_emissao,
   array(
     CURLOPT_URL => 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/envia',
     CURLOPT_RETURNTRANSFER => true,
@@ -151,22 +151,92 @@ curl_setopt_array(
   )
 );
 
-$response = curl_exec($curl);
-curl_close($curl);
+$nota_emitida = curl_exec($curl_emissao);
+curl_close($curl_emissao);
+$informacoesNFE = explode(',', $nota_emitida);
 
-$informacoesNFE = explode(',', $response);
 
+if (strpos($nota_emitida, 'Autorizado o uso da NF-e') == true) {
 
-if (strpos($response, 'Autorizado o uso da NF-e') == true) {
   try {
+
     require_once __DIR__ . '/../../../../../../wp-admin/admin.php';
+
     global $wpdb;
+
     $wpdb->query($wpdb->prepare("UPDATE wp_wc_order_stats SET chave_nota_fiscal_plug=$informacoesNFE[1] WHERE order_id = $_POST[numero_do_pedido_woocommerce]"));
     $wpdb->query($wpdb->prepare("UPDATE wp_wc_order_stats SET situacao_nota_fiscal_plug='Emitido' WHERE order_id = $_POST[numero_do_pedido_woocommerce]"));
+
+    # cURL - enviando e-mail com NF-e para destinatários
+    if (isset($_POST['emailCliente']) && $_POST['emailCliente'] != '') {
+
+      $emailDestinatario = $_POST['emailCliente'];
+      $emailAdmin = $_POST['email_adm'];
+      $destinatarios = explode(',', (str_replace(' ', '', $_POST['emailCliente'])));
+      $assunto = $_POST['assunto'];
+      $texto = $_POST['texto'];
+
+      for ($i = 0; $i < count($destinatarios); $i++) {
+        $enviandoEmail = curl_init();
+        curl_setopt_array(
+          $enviandoEmail,
+          array(
+            CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/email",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => "Grupo=$grupo&CNPJ=$cnpj&EmailDestinatario=$destinatarios[$i]&ChaveNota=$informacoesNFE[1]&Assunto=$assunto&Texto=$texto&AnexaPDF=1&ConteudoHTML=0&EmailCCo=$emailAdmin&EmailCC=$emailAdmin",
+            CURLOPT_HTTPHEADER => array(
+              'Content-Type: application/x-www-form-urlencoded',
+              'Authorization: Basic ' . $autorizacao,
+            ),
+          )
+        );
+        $emailEnviado = curl_exec($enviandoEmail);
+        curl_close($enviandoEmail);
+      }
+    }
+
+    # cURL - imprimindo .pdf
+    $curl_pdf = curl_init();
+
+    curl_setopt_array(
+      $curl_pdf,
+      array(
+        CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/imprime?grupo=$grupo&cnpj=$cnpj&ChaveNota=$informacoesNFE[1]&Url=1",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_POSTFIELDS => "",
+        CURLOPT_HTTPHEADER => array(
+          'Content-Type: application/x-www-form-urlencoded',
+          'Authorization: Basic ' . $autorizacao,
+        ),
+      )
+    );
+
+    $url = curl_exec($curl_pdf);
+    curl_close($curl_pdf);
+
+    $nomeArquivo = __DIR__ . '/../pdf/' . $informacoesNFE[1] . '.pdf';
+    $nf = copy($url, $nomeArquivo);
+
+    $wpdb->query($wpdb->prepare("UPDATE wp_wc_order_stats SET pdf_nota_fiscal_plug='$informacoesNFE[1].pdf' WHERE order_id = $_POST[numero_do_pedido_woocommerce]"));
+    header('Location: ' . $_SERVER['REQUEST_URI'] . '/../../pdf/' . basename($nomeArquivo));
+
   } catch (\Throwable $th) {
     echo $th->getMessage();
   }
+} else {
+  header('Location: ../../table/index.php');
 }
 
-header('Location: ../../table/index.php');
 ?>
