@@ -31,10 +31,20 @@ $configuracoes = get_option('nf_plug_dados');
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
 
+    <script src="validacao.js"></script>
+
     <title>NF-e PLUG</title>
 </head>
 
 <body class="container">
+
+    <div style="padding: 2% 2% 2% 2%;">
+        <h3>
+            <i class="bi bi-info-square"></i>
+            Gerenciamento das notas fiscais
+        </h3>
+        <hr>
+    </div>
 
     <div style="padding: 2% 2% 2% 2%;">
 
@@ -95,14 +105,14 @@ $configuracoes = get_option('nf_plug_dados');
                     <div class="modal fade" id="modalEmail" tabindex="-1" aria-labelledby="modalEmailLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
-                            <form action="../form/backend/enviar-email-nfe.php" method="post">
+                            <form action="../form/backend/enviar-email-nfe.php" id="modal_email" method="post">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="modalEmailLabel">Enviar NF-e</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" id="campos_modal_form">
                                         <div class="mb-3">
                                             <label for="chave_nf_plug" class="col-form-label">Chave de acesso:</label>
                                             <input readonly type="text" class="form-control" name="chave_nf_plug"
@@ -132,10 +142,16 @@ $configuracoes = get_option('nf_plug_dados');
                                         <input type="hidden" class="validate-config" name="nome"
                                             value="<?php echo $configuracoes['nome']; ?>">
                                     </div>
-                                    <div class="modal-footer">
+
+                                    <div id="progress_bar">
+                                        <!--  -->
+                                    </div>
+
+                                    <div class="modal-footer" id="bloco-de-botoes">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                                        <button type="button" onclick="validarFormulario()"
+                                            class="btn btn-primary">Confirmar</button>
                                     </div>
                                 </div>
                             </form>
