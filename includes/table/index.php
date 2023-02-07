@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../../../../wp-admin/admin.php';
 $orders = wc_get_orders(array('status' => 'completed'));
 $nf_plug_admin = new nf_plug_admin(nf_plug_BASE_NAME, nf_plug_PLUGIN_SLUG, nf_plug_VERSION);
+$configuracoes = get_option('nf_plug_dados');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,28 +81,79 @@ $nf_plug_admin = new nf_plug_admin(nf_plug_BASE_NAME, nf_plug_PLUGIN_SLUG, nf_pl
                                     target="_blank" rel="noopener noreferrer"><button type="button" title="Baixar PDF"
                                         class="btn btn-outline-danger"><i class="bi bi-filetype-pdf"></i></button></a>
                                 <a href="../form/xml/<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'xml_nota_fiscal_plug'); ?>"
-                                    target="_blank" rel="noopener noreferrer" download="../form/xml/<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'xml_nota_fiscal_plug'); ?>"><button type="button" title="Baixar XML"
-                                        class="btn btn-outline-success"><i class="bi bi-filetype-xml"></i></button></a>
-                                <button type="button" title="Enviar NF-e por e-mail" class="btn btn-outline-dark"><i
+                                    target="_blank" rel="noopener noreferrer"
+                                    download="../form/xml/<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'xml_nota_fiscal_plug'); ?>"><button
+                                        type="button" title="Baixar XML" class="btn btn-outline-success"><i
+                                            class="bi bi-filetype-xml"></i></button></a>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalEmail"
+                                    title="Enviar NF-e por e-mail" class="btn btn-outline-dark"><i
                                         class="bi bi-envelope-at"></i></button>
                             <?php } ?>
-
                         </td>
-
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
 
-        <script>
-            $(document).ready(function () {
-                $('#example').DataTable({
-                    language: {
-                        url: "https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json"
-                    }
-                });
+                    <div class="modal fade" id="modalEmail" tabindex="-1" aria-labelledby="modalEmailLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="../form/backend/enviar-email-nfe.php" method="post">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="modalEmailLabel">Enviar NF-e</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="chave_nf_plug" class="col-form-label">Chave de acesso:</label>
+                                            <input readonly type="text" class="form-control" name="chave_nf_plug"
+                                                value="<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'chave_nota_fiscal_plug'); ?>"
+                                                id="chave_nf_plug">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="emailCliente" class="col-form-label">Endereços de e-mail separados
+                                                por ",":</label>
+                                            <textarea class="form-control" name="emailCliente"
+                                                id="emailCliente"><?php echo $order->get_billing_email(); ?></textarea>
+                                        </div>
+
+                                        <!-- Configurações -->
+                                        <input type="hidden" class="validate-config" name="cnpj"
+                                            value="<?php echo $configuracoes['cnpj']; ?>">
+                                        <input type="hidden" class="validate-config" name="grupo"
+                                            value="<?php echo $configuracoes['grupo']; ?>">
+                                        <input type="hidden" class="validate-config" name="email_adm"
+                                            value="<?php echo get_user_meta($adm->ID, 'billing_email', true); ?>">
+                                        <input type="hidden" class="validate-config" name="assunto"
+                                            value="<?php echo $configuracoes['assunto']; ?>">
+                                        <input type="hidden" class="validate-config" name="texto"
+                                            value="<?php echo $configuracoes['texto']; ?>">
+                                        <input type="hidden" class="validate-config" name="senha"
+                                            value="<?php echo $configuracoes['senha']; ?>">
+                                        <input type="hidden" class="validate-config" name="nome"
+                                            value="<?php echo $configuracoes['nome']; ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+        </div>
+    <?php endforeach; ?>
+    </tbody>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json"
+                }
             });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
