@@ -224,14 +224,41 @@ if (strpos($nota_emitida, 'Autorizado o uso da NF-e') == true) {
     );
 
     $url = curl_exec($curl_pdf);
-    curl_close($curl_pdf);
-
     $nomeArquivo = __DIR__ . '/../pdf/' . $informacoesNFE[1] . '.pdf';
     $nf = copy($url, $nomeArquivo);
 
-    $wpdb->query($wpdb->prepare("UPDATE wp_wc_order_stats SET pdf_nota_fiscal_plug='$informacoesNFE[1].pdf' WHERE order_id = $_POST[numero_do_pedido_woocommerce]"));
-    header('Location: ' . $_SERVER['REQUEST_URI'] . '/../../pdf/' . basename($nomeArquivo));
+    # cURL - imprimindo .xml
+    $curl_xml = curl_init();
 
+    curl_setopt_array(
+      $curl_xml,
+      array(
+        CURLOPT_URL => "https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/xml?Grupo=$grupo&CNPJ=$cnpj&ChaveNota=$informacoesNFE[1]",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_POSTFIELDS => "",
+        CURLOPT_HTTPHEADER => array(
+          // 'Content-Type: application/x-www-form-urlencoded',
+          'Authorization: Basic ' . $autorizacao,
+        ),
+      )
+    );
+
+    $link = curl_exec($curl_xml);
+    curl_close($curl_xml);
+
+    $xml_arquivo = fopen(__DIR__ . '/../xml/' . $informacoesNFE[1] . '.xml', "a");
+    fwrite($xml_arquivo, $link);
+
+    $wpdb->query($wpdb->prepare("UPDATE wp_wc_order_stats SET pdf_nota_fiscal_plug='$informacoesNFE[1].pdf' WHERE order_id = $_POST[numero_do_pedido_woocommerce]"));
+    $wpdb->query($wpdb->prepare("UPDATE wp_wc_order_stats SET xml_nota_fiscal_plug='$informacoesNFE[1].xml' WHERE order_id = $_POST[numero_do_pedido_woocommerce]"));
+
+    header('Location: ' . $_SERVER['REQUEST_URI'] . '/../../pdf/' . basename($nomeArquivo));
   } catch (\Throwable $th) {
     echo $th->getMessage();
   }

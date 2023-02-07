@@ -76,13 +76,12 @@ $nf_plug_admin = new nf_plug_admin(nf_plug_BASE_NAME, nf_plug_PLUGIN_SLUG, nf_pl
                                 <i style="color: red;" title="Cancelado" class="bi bi-x-circle-fill"></i>
 
                             <?php } else { ?>
-                                <!-- <button type="button" title="Cancelar" class="btn btn-outline-danger"><i
-                                                class="bi bi-x-circle-fill"></i></button> -->
-                                <a href="../form/pdf/<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'pdf_nota_fiscal_plug'); ?>" target="_blank" rel="noopener noreferrer"><button type="button"
-                                        title="Baixar PDF" class="btn btn-outline-danger"><i
-                                            class="bi bi-filetype-pdf"></i></button></a>
-                                <button type="button" title="Baixar XML" class="btn btn-outline-success"><i
-                                        class="bi bi-filetype-xml"></i></button>
+                                <a href="../form/pdf/<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'pdf_nota_fiscal_plug'); ?>"
+                                    target="_blank" rel="noopener noreferrer"><button type="button" title="Baixar PDF"
+                                        class="btn btn-outline-danger"><i class="bi bi-filetype-pdf"></i></button></a>
+                                <a href="../form/xml/<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'xml_nota_fiscal_plug'); ?>"
+                                    target="_blank" rel="noopener noreferrer" download="../form/xml/<?php echo $nf_plug_admin->buscarCampoPersonalizadoEmPedidos($order->get_id(), 'xml_nota_fiscal_plug'); ?>"><button type="button" title="Baixar XML"
+                                        class="btn btn-outline-success"><i class="bi bi-filetype-xml"></i></button></a>
                                 <button type="button" title="Enviar NF-e por e-mail" class="btn btn-outline-dark"><i
                                         class="bi bi-envelope-at"></i></button>
                             <?php } ?>

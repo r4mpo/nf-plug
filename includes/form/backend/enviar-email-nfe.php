@@ -7,6 +7,7 @@ if (isset($_POST['emailCliente'])) {
     $chaveDaNota = 'aaa';
     $emailDestinatario = $_POST['emailCliente'];
     $emailAdmin = $_POST['email_adm'];
+    
     $destinatarios = explode(',', (str_replace(' ', '', $_POST['emailCliente'])));
     $assunto = $_POST['assunto'];
     $texto = $_POST['texto'];
