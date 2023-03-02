@@ -157,7 +157,7 @@ foreach ($order->get_items() as $item_key => $item): ?>
                     <div class="form-floating">
                         <input type="text" class="form-control validate-form formatar-moeda"
                             id="item[<?php echo $contador; ?>]['vBC_N15']" name="item[<?php echo $contador; ?>]['vBC_N15']"
-                            value="0" onkeyup="formatarMoeda(this);">
+                            value="<?php echo $item->get_product()->get_price(); ?>" onkeyup="formatarMoeda(this);">
                         <label for="item[<?php echo $contador; ?>]['vBC_N15']">Valor da BC do ICMS</label>
                     </div>
                 </div>
@@ -186,7 +186,7 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text">%</span>
                     <div class="form-floating">
-                        <input type="text" value="0" class="form-control validate-form" maxlength="15"
+                        <input type="text" value="3" class="form-control validate-form" maxlength="15"
                             id="item[<?php echo $contador; ?>]['pPIS_Q08']" onkeypress="return apenasNumeros();"
                             name="item[<?php echo $contador; ?>]['pPIS_Q08']">
                         <label for="pPIS_Q08">Alíquota do PIS</label>
@@ -219,7 +219,7 @@ foreach ($order->get_items() as $item_key => $item): ?>
                 <div class="input-group mb-3 col">
                     <span class="input-group-text">%</span>
                     <div class="form-floating">
-                        <input type="text" value="0" class="form-control validate-form" maxlength="15"
+                        <input type="text" value="0.65" class="form-control validate-form" maxlength="15"
                             id="item[<?php echo $contador; ?>]['pCOFINS_S08']" onkeypress="return apenasNumeros();"
                             name="item[<?php echo $contador; ?>]['pCOFINS_S08']">
                         <label for="pCOFINS_S08">Alíquota do COFINS</label>

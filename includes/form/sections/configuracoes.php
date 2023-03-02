@@ -6,7 +6,6 @@
 <input type="hidden" class="validate-config" name="grupo" value="<?php echo $configuracoes['grupo']; ?>">
 <input type="hidden" class="validate-config" name="cnpj" value="<?php echo $configuracoes['cnpj']; ?>">
 <input type="hidden" class="validate-config" name="CNPJ_C02" value="<?php echo $configuracoes['CNPJ_C02']; ?>">
-<input type="hidden" class="validate-config" name="nro_C07" value="<?php echo $configuracoes['nro_C07']; ?>">
 <input type="hidden" class="validate-config" name="IE_C17" value="<?php echo $configuracoes['IE_C17']; ?>">
 <input type="hidden" class="validate-config" name="cProd_I02" value="<?php echo $configuracoes['cProd_I02']; ?>">
 <input type="hidden" class="validate-config" name="Formato" value="<?php echo $configuracoes['Formato']; ?>">
@@ -37,9 +36,8 @@
 <input type="hidden" class="validate-config" name="serie_B07" value="<?php echo $configuracoes['serie_B07']; ?>">
 <input type="hidden" class="validate-config" name="nNF_B08" value="<?php echo $configuracoes['nNF_B08']; ?>">
 <input type="hidden" class="validate-config" name="numero_do_pedido_woocommerce" value="<?php echo $id; ?>">
-<input type="hidden" class="validate-config" name="pICMS_N16"
-    value="<?php echo $configuracoes['base_calculo_icms']; ?>">
+<!-- <input type="hidden" class="validate-config" name="pICMS_N16"
+    value="<?php echo $configuracoes['base_calculo_icms']; ?>"> -->
 <!-- <input type="hidden" class="validate-config" name="vBCST_N21" value="<?php echo $configuracoes['base_calculo_icms_st']; ?>"> -->
 <input type="hidden" class="validate-config" name="modBC_N13" value="<?php echo $configuracoes['mod_bc_icms']; ?>">
-<input type="hidden" class="validate-config" name="email_adm"
-    value="<?php echo get_user_meta($adm->ID, 'billing_email', true); ?>">
+<input type="hidden" class="validate-config" name="email_adm" value="<?php echo $configuracoes['email_adm']; ?>">

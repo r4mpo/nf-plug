@@ -67,7 +67,7 @@ if (is_admin())
         $nf_plug_admin->possivelmente_adicionar_coluna(
             'wp_wc_order_stats',
             'situacao_nota_fiscal_plug',
-            'ALTER TABLE wp_wc_order_stats ADD situacao_nota_fiscal_plug varchar(255) NOT NULL DEFAULT ("Pendente")',
+            'ALTER TABLE wp_wc_order_stats ADD situacao_nota_fiscal_plug varchar(255) NOT NULL DEFAULT "Pendente"',
         );
 
         # Desativando plugin

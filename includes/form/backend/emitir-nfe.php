@@ -24,6 +24,7 @@ fwrite($txt, "\ntpAmb_B24=" . $_POST["tpAmb_B24"]);
 fwrite($txt, "\nfinNFe_B25=" . $_POST["finNFe_B25"]);
 fwrite($txt, "\nINDFINAL_B25A=" . $_POST["INDFINAL_B25A"]);
 fwrite($txt, "\nINDPRES_B25B=" . $_POST["INDPRES_B25B"]);
+fwrite($txt, "\nindIntermed_B25c=0");
 fwrite($txt, "\nprocEmi_B26=" . $_POST["procEmi_B26"]);
 fwrite($txt, "\nverProc_B27=" . $_POST["verProc_B27"]);
 fwrite($txt, "\nCRT_C21=" . $_POST["CRT_C21"]);
@@ -36,7 +37,7 @@ fwrite($txt, "\ncMun_C10=" . $_POST["cMun_C10"]);
 fwrite($txt, "\nxMun_C11=" . $_POST["xMun_C11"]);
 fwrite($txt, "\nUF_C12=" . $_POST["UF_C12"]);
 fwrite($txt, "\nCEP_C13=" . $_POST["CEP_C13"]);
-fwrite($txt, "\nfone_C16=" . $_POST["fone_C16"]);
+fwrite($txt, "\nfone_C16=" .  preg_replace('/\D/', '', $_POST["fone_C16"]));
 fwrite($txt, "\nIE_C17=" . $_POST["IE_C17"]);
 
 if (isset($_POST["CNPJ_E02"])) {
@@ -82,7 +83,8 @@ for ($i = 1; $i <= count($item); $i++) {
   fwrite($txt, "\nmodBC_N13=" . $_POST["modBC_N13"]);
   fwrite($txt, "\nvBC_N15=" . (preg_replace('/\D/', '', $item[$i]["'vBC_N15'"])) / 100);
   fwrite($txt, "\npICMS_N16=" . $_POST["pICMS_N16"]);
-  fwrite($txt, "\nvICMS_N17=" . (preg_replace('/\D/', '', $item[$i]["'vICMS_N17'"])) / 100);
+  fwrite($txt, "\nvICMS_N17=" . number_format(round(((preg_replace('/\D/', '', $item[$i]["'vBC_N15'"])) / 100) * ((preg_replace('/\D/', '', $_POST["pICMS_N16"]))  / 100), 2), 2, '.', ''));
+  // fwrite($txt, "\nvICMS_N17=" . (preg_replace('/\D/', '', $item[$i]["'vICMS_N17'"])) / 100);
   fwrite($txt, "\nCST_Q06=" . $item[$i]["'CST_Q06'"]);
   fwrite($txt, "\nvBC_Q07=" . (preg_replace('/\D/', '', $item[$i]["'vBC_Q07'"])) / 100);
   fwrite($txt, "\npPIS_Q08=" . $item[$i]["'pPIS_Q08'"]);
@@ -93,8 +95,9 @@ for ($i = 1; $i <= count($item); $i++) {
   fwrite($txt, "\nvCOFINS_S11=" . (preg_replace('/\D/', '', $item[$i]["'vCOFINS_S11'"])) / 100);
   fwrite($txt, "\nSALVARITEM");
 }
-fwrite($txt, "\nvBC_W03=" . preg_replace('/\D/', '', $_POST["vBC_W03"]) / 100);
-fwrite($txt, "\nvICMS_W04=" . preg_replace('/\D/', '', $_POST["vICMS_W04"]) / 100);
+fwrite($txt, "\nvBC_W03=" . preg_replace('/\D/', '', $_POST["vProd_W07"]) / 100);
+fwrite($txt, "\nvICMS_W04=" . number_format(round((preg_replace('/\D/', '', $_POST["vProd_W07"]) / 100) * (preg_replace('/\D/', '', $_POST["pICMS_N16"]) / 100), 2), 2, '.', ''));
+// fwrite($txt, "\nvICMS_W04=" . preg_replace('/\D/', '', $_POST["vICMS_W04"]) / 100);
 fwrite($txt, "\nvICMSDeson_W04a=" . preg_replace('/\D/', '', $_POST["vICMSDeson_W04a"]) / 100);
 fwrite($txt, "\nvFCP_W04h=" . preg_replace('/\D/', '', $_POST["vFCP_W04h"]) / 100);
 fwrite($txt, "\nvBCST_W05=" . preg_replace('/\D/', '', $_POST["vBCST_W05"]) / 100);
@@ -114,6 +117,88 @@ fwrite($txt, "\nvOutro_W15=" . preg_replace('/\D/', '', $_POST["vOutro_W15"]) / 
 fwrite($txt, "\nvNF_W16=" . preg_replace('/\D/', '', $_POST["vNF_W16"]) / 100);
 fwrite($txt, "\nmodFrete_X02=" . $_POST["modFrete_X02"]);
 fwrite($txt, "\nINCLUIRPARTE=YA");
+
+if (isset($_POST['CNPJ_X04']) && $_POST['CNPJ_X04'] != '') {
+  fwrite($txt, "\nCNPJ_X04=" . $_POST["CNPJ_X04"]);
+}
+
+if (isset($_POST['xNome_X06']) && $_POST['xNome_X06'] != '') {
+  fwrite($txt, "\nxNome_X06=" . $_POST["xNome_X06"]);
+}
+
+if (isset($_POST['CPF_X05']) && $_POST['CPF_X05'] != '') {
+  fwrite($txt, "\nCPF_X05=" . $_POST["CPF_X05"]);
+}
+
+if (isset($_POST['IE_X07']) && $_POST['IE_X07'] != '') {
+  fwrite($txt, "\nIE_X07=" . $_POST["IE_X07"]);
+}
+
+if (isset($_POST['xEnder_X08']) && $_POST['xEnder_X08'] != '') {
+  fwrite($txt, "\nxEnder_X08=" . $_POST["xEnder_X08"]);
+}
+
+if (isset($_POST['xMun_X09']) && $_POST['xMun_X09'] != '') {
+  fwrite($txt, "\nxMun_X09=" . $_POST["xMun_X09"]);
+}
+
+if (isset($_POST['UF_X10']) && $_POST['UF_X10'] != '') {
+  fwrite($txt, "\nUF_X10=" . $_POST["UF_X10"]);
+}
+
+if (isset($_POST['placa_X19']) && $_POST['placa_X19'] != '') {
+  fwrite($txt, "\nplaca_X19=" . $_POST["placa_X19"]);
+}
+
+if (isset($_POST['UF_X20']) && $_POST['UF_X20'] != '') {
+  fwrite($txt, "\nUF_X20=" . $_POST["UF_X20"]);
+}
+
+if (
+  isset($_POST['qVol_X27']) && ($_POST['qVol_X27'] != '') ||
+  isset($_POST['esp_X28']) && ($_POST['esp_X28'] != '') ||
+  isset($_POST['marca_X29']) && ($_POST['marca_X29'] != '') ||
+  isset($_POST['nVol_X30']) && ($_POST['nVol_X30'] != '') ||
+  isset($_POST['pesoL_X31']) && ($_POST['pesoL_X31'] != '') ||
+  isset($_POST['pesoB_X32']) && ($_POST['pesoB_X32'] != '')
+) {
+  fwrite($txt, "\nINCLUIRPARTE=VOL");
+}
+
+if (isset($_POST['qVol_X27']) && ($_POST['qVol_X27'] != '')) {
+  fwrite($txt, "\nqVol_X27=" . $_POST["qVol_X27"]);
+}
+
+if (isset($_POST['esp_X28']) && ($_POST['esp_X28'] != '')) {
+  fwrite($txt, "\nesp_X28=" . $_POST["esp_X28"]);
+}
+
+if (isset($_POST['marca_X29']) && ($_POST['marca_X29'] != '')) {
+  fwrite($txt, "\nmarca_X29=" . $_POST["marca_X29"]);
+}
+
+if (isset($_POST['nVol_X30']) && ($_POST['nVol_X30'] != '')) {
+  fwrite($txt, "\nnVol_X30=" . $_POST["nVol_X30"]);
+}
+
+if (isset($_POST['pesoL_X31']) && ($_POST['pesoL_X31'] != '')) {
+  fwrite($txt, "\npesoL_X31=" . $_POST["pesoL_X31"]);
+}
+if (isset($_POST['pesoB_X32']) && ($_POST['pesoB_X32'] != '')) {
+  fwrite($txt, "\npesoB_X32=" . $_POST["pesoB_X32"]);
+}
+
+if (
+  isset($_POST['qVol_X27']) && ($_POST['qVol_X27'] != '') ||
+  isset($_POST['esp_X28']) && ($_POST['esp_X28'] != '') ||
+  isset($_POST['marca_X29']) && ($_POST['marca_X29'] != '') ||
+  isset($_POST['nVol_X30']) && ($_POST['nVol_X30'] != '') ||
+  isset($_POST['pesoL_X31']) && ($_POST['pesoL_X31'] != '') ||
+  isset($_POST['pesoB_X32']) && ($_POST['pesoB_X32'] != '')
+) {
+  fwrite($txt, "\nSALVARPARTE=VOL");
+}
+
 fwrite($txt, "\ntPag_YA02=" . preg_replace('/\D/', '', $_POST["tPag_YA02"]));
 fwrite($txt, "\nvPag_YA03=" . preg_replace('/\D/', '', $_POST["vPag_YA03"]) / 100);
 fwrite($txt, "\nSALVARPARTE=YA");
@@ -123,6 +208,7 @@ fwrite($txt, "\nemail_ZD05=" . $_POST["email_ZD05"]);
 fwrite($txt, "\nfone_ZD06=" . $_POST["fone_ZD06"]);
 fwrite($txt, "\ninfCpl_Z03=" . preg_replace("/(\\r)?\\n/i", "/", $_POST["infCpl_Z03"]));
 fwrite($txt, "\nSALVAR");
+
 $tx2 = file_get_contents(__DIR__ . '/../tx2/' . $_POST['numero_do_pedido_woocommerce'] . '_' . date("Y-m-d h_i_s", time()) . '.txt');
 
 $cnpj = $_POST['cnpj'];
@@ -154,7 +240,6 @@ curl_setopt_array(
 $nota_emitida = curl_exec($curl_emissao);
 curl_close($curl_emissao);
 $informacoesNFE = explode(',', $nota_emitida);
-
 
 if (strpos($nota_emitida, 'Autorizado o uso da NF-e') == true) {
 
@@ -263,7 +348,7 @@ if (strpos($nota_emitida, 'Autorizado o uso da NF-e') == true) {
     echo $th->getMessage();
   }
 } else {
-  header('Location: ../../table/index.php');
+  return var_dump($tx2);
+  // header("Location: ../msg/error.php?mensagem=$nota_emitida");
 }
-
 ?>

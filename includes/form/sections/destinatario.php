@@ -5,7 +5,7 @@
         <div class="row">
 
             <?php if ($order->get_meta('_billing_cnpj', true) != ""): ?>
-                <div class="input-group mb-3 col">
+                <div class="input-group mb-3 col" id="cnpj_destinatario">
                     <span class="input-group-text"><i class="bi bi-file-text"></i></span>
                     <div class="form-floating">
                         <input type="text" value="<?php echo $order->get_meta('_billing_cnpj', true); ?>"
@@ -47,7 +47,7 @@
                     <input type="text" class="form-control validate-form" id="CEP_E13" name="CEP_E13"
                         value="<?php echo $order->shipping_postcode; ?>" onkeypress="return apenasNumeros();"
                         onkeyup="viaCep('CEP_E13', 'xBairro_E09', 'xMun_E11', 'UF_E12', 'xLgr_E06', 'cMun_E10')"
-                        maxlength="12">
+                        maxlength="13">
                     <label for="CEP_E13">CEP</label>
                 </div>
             </div>

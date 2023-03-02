@@ -54,3 +54,25 @@ function enviarEmail(id_checkbox, id_input) {
         input.disabled = true;
     }
 }
+
+function RgOuCpfTransportadora() {
+    let cnpj = document.getElementById('CNPJ_X04');
+    let cpf = document.getElementById('CPF_X05');
+    let inscricao_estadual = document.getElementById('IE_X07');
+
+    if (cnpj.value.length > 0) {
+        cpf.disabled = true;
+    } else {
+        cpf.disabled = false;
+    }
+
+    if (cpf.value.length > 0) {
+        cnpj.disabled = true;
+        inscricao_estadual.disabled = true;
+        inscricao_estadual.classList.remove('validate-form');
+    } else {
+        cnpj.disabled = false;
+        inscricao_estadual.disabled = false;
+        inscricao_estadual.classList.add('validate-form');
+    }
+}
