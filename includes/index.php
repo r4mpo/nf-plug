@@ -55,7 +55,7 @@ $nf_plug_admin = new nf_plug_admin(nf_plug_BASE_NAME, nf_plug_PLUGIN_SLUG, nf_pl
                             <?php echo $order->get_id(); ?>
                         </th>
                         <td>
-                            <?php echo $order->get_user()->display_name; ?>
+                            <?php echo $order->get_billing_first_name(); ?>
                         </td>
                         <td>
                             <?php echo wc_format_datetime($order->get_date_created(), 'd/m/Y') . ' às ' . wc_format_datetime($order->get_date_created(), 'h:i:s'); ?>

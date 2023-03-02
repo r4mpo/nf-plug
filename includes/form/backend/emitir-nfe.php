@@ -348,7 +348,6 @@ if (strpos($nota_emitida, 'Autorizado o uso da NF-e') == true) {
     echo $th->getMessage();
   }
 } else {
-  return var_dump($tx2);
-  // header("Location: ../msg/error.php?mensagem=$nota_emitida");
+  header("Location: ../msg/error.php?mensagem=$nota_emitida");
 }
 ?>

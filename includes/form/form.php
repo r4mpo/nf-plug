@@ -49,7 +49,7 @@ $configuracoes = get_option('nf_plug_dados');
 
     <title>
         <?php echo $id; ?> -
-        <?php echo $order->get_user()->display_name; ?>
+        <?php echo $order->get_billing_first_name(); ?>
     </title>
 </head>
 

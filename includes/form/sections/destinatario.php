@@ -32,7 +32,7 @@
                 <span class="input-group-text"><i class="bi bi-people-fill"></i></span>
                 <div class="form-floating">
                     <input type="text" class="form-control validate-form" id="xNome_E04" name="xNome_E04"
-                        value="<?php echo $configuracoes['tpAmb_B24'] === '2' ? 'NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL' : $order->get_user()->display_name; ?>">
+                        value="<?php echo $configuracoes['tpAmb_B24'] === '2' ? 'NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL' : $order->get_billing_first_name(); ?>">
                     <label for="xNome_E04">Nome</label>
                 </div>
             </div>
@@ -99,7 +99,7 @@
             <div class="input-group mb-3 col">
                 <span class="input-group-text"><i class="bi bi-clipboard2-plus"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="xCpl_E08" name="xCpl_E08">
+                    <input type="text" value="<?php echo $order->get_billing_address_2(); ?>" class="form-control" id="xCpl_E08" name="xCpl_E08">
                     <label for="xCpl_E08">Complemento</label>
                 </div>
             </div>
