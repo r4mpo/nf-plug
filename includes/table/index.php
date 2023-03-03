@@ -9,6 +9,7 @@ $configuracoes = get_option('nf_plug_dados');
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!-- DataTable CDN -->
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>

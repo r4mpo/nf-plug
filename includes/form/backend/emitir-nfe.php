@@ -59,6 +59,11 @@ fwrite($txt, "\nxMun_E11=" . $_POST["xMun_E11"]);
 fwrite($txt, "\nUF_E12=" . $_POST["UF_E12"]);
 fwrite($txt, "\nCEP_E13=" . $_POST["CEP_E13"]);
 fwrite($txt, "\nINDIEDEST_E16A=" . $_POST["INDIEDEST_E16A"]);
+
+if (isset($_POST["IE_E17"])) {
+  fwrite($txt, "\nIE_E17=" . preg_replace('/\D/', '', $_POST["IE_E17"]));
+}
+
 $item = $_POST['item'];
 for ($i = 1; $i <= count($item); $i++) {
   fwrite($txt, "\nINCLUIRITEM");
